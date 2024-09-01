@@ -1,17 +1,28 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
 
 export interface IProjectState {
-    projectName: string;
-    date: string;
-    setProject: (projectName: string, date: string) => void;
-    resetProject: () => void;
+  projectName: string
+  projectDate: string
+  setProjectName: (projectName: string) => void
+  setProjectDate: (date: string) => void
+  resetProject: () => void
 }
 
-const useProjectStore = create<IProjectState>((set) => ({
+const projectStore = (set: any) => ({
   projectName: '',
-  date: '',
-  setProject: (projectName: string, date: string) => set(() => ({ projectName, date })),
-  resetProject: () => set(() => ({ projectName: '', date: '' })),
-}));
+  projectDate: '',
+  setProjectName: (projectName: string) =>
+    set((state: IProjectState) => ({ ...state, projectName })),
+  setProjectDate: (projectDate: string) =>
+    set((state: IProjectState) => ({ ...state, projectDate })),
+  resetProject: () => set(() => ({ projectName: '', projectDate: '' })),
+})
 
-export default useProjectStore;
+const useProjectStore = create<IProjectState>()(
+  persist(devtools(projectStore, { name: 'ProjectStore' }), {
+    name: 'projectStore',
+  }),
+)
+
+export default useProjectStore
