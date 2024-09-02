@@ -1,4 +1,4 @@
-interface ISoilDatabase {
+interface ISoilData {
   Symbol: string
   TotalPorosity: number | null
   WaterFilledPorosoty: number | null
@@ -14,7 +14,7 @@ interface ISoilDatabase {
   nwRange: number | null
 }
 
-export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
+export const SOIL_DATABASE: Record<string, ISoilData> = {
   Clay: {
     Symbol: 'C',
     TotalPorosity: 0.459,
