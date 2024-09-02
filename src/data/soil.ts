@@ -14,7 +14,6 @@ interface ISoilDatabase {
   nwRange: number | null
 }
 
-// TODO: nwRange 값 수정되면 반영
 export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
   Clay: {
     Symbol: 'C',
@@ -29,7 +28,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.2019,
     qr: 0.098,
     MeanGrainDiameter: 0.0092,
-    nwRange: 0.098,
+    nwRange: 0.1,
   },
   'Clay Loam': {
     Symbol: 'CL',
@@ -44,7 +43,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.2938,
     qr: 0.079,
     MeanGrainDiameter: 0.016,
-    nwRange: 0.079,
+    nwRange: 0.1,
   },
   Loam: {
     Symbol: 'L',
@@ -59,7 +58,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.3207,
     qr: 0.061,
     MeanGrainDiameter: 0.012,
-    nwRange: 0.061,
+    nwRange: 0.1,
   },
   'Loamy Sand': {
     Symbol: 'LS',
@@ -74,7 +73,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.4273,
     qr: 0.049,
     MeanGrainDiameter: 0.044,
-    nwRange: 0.049,
+    nwRange: 0.007,
   },
   Sand: {
     Symbol: 'S',
@@ -89,7 +88,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.6852,
     qr: 0.053,
     MeanGrainDiameter: 0.053,
-    nwRange: 0.053,
+    nwRange: 0.005,
   },
   'Sandy Clay': {
     Symbol: 'SC',
@@ -104,7 +103,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.1722,
     qr: 0.117,
     MeanGrainDiameter: 0.048,
-    nwRange: 0.048,
+    nwRange: 0.2,
   },
   'Sandy Clay Loam': {
     Symbol: 'SCL',
@@ -119,7 +118,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.2481,
     qr: 0.063,
     MeanGrainDiameter: 0.028,
-    nwRange: 0.063,
+    nwRange: 0.1,
   },
   'Sandy Loam': {
     Symbol: 'SL',
@@ -134,7 +133,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.3099,
     qr: 0.039,
     MeanGrainDiameter: 0.03,
-    nwRange: 0.039,
+    nwRange: 0.1,
   },
   Silt: {
     Symbol: 'SI',
@@ -149,7 +148,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.4044,
     qr: 0.074,
     MeanGrainDiameter: 0.006,
-    nwRange: 0.074,
+    nwRange: 0.1,
   },
   'Silt Loam': {
     Symbol: 'SIL',
@@ -164,7 +163,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.3987,
     qr: 0.065,
     MeanGrainDiameter: 0.008,
-    nwRange: 0.065,
+    nwRange: 0.2,
   },
   'Silty Clay': {
     Symbol: 'SIC',
@@ -179,7 +178,7 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.243,
     qr: 0.111,
     MeanGrainDiameter: 0.0064,
-    nwRange: 0.111,
+    nwRange: 0.2,
   },
   'Silty Clay Loam': {
     Symbol: 'SICL',
@@ -194,6 +193,6 @@ export const SOIL_DATABASE: Record<string, ISoilDatabase> = {
     M: 0.3425,
     qr: 0.09,
     MeanGrainDiameter: 0.0056,
-    nwRange: 0.09,
+    nwRange: 0.15,
   },
 }
