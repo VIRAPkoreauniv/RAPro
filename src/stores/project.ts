@@ -26,7 +26,8 @@ const projectStore = (set: any) => ({
     set((state: IProjectState) => ({ ...state, scenario })),
   setCurrStep: (currStep: number) =>
     set((state: IProjectState) => ({ ...state, currStep })),
-  resetProject: () => set(() => ({ projectName: '', projectDate: '' })),
+  resetProject: () =>
+    set(() => ({ projectName: '', projectDate: '', scenario: 0, currStep: 0 })),
 })
 
 const useProjectStore = create<IProjectState>()(
