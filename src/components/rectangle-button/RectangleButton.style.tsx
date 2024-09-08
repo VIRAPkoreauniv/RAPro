@@ -1,7 +1,17 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.button<{ isActive: boolean }>`
-  width: 38.4rem;
+export const Wrapper = styled.button<{
+  isActive: boolean
+  size: 'large' | 'medium'
+}>`
+  width: ${({ size }) => {
+    switch (size) {
+      case 'large':
+        return '38.4rem'
+      default:
+        return '17.7rem'
+    }
+  }};
   height: 6rem;
   border-radius: 1rem;
   background-color: ${({ isActive }) =>
