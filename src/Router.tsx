@@ -7,7 +7,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/step1" element={<Step1Page />} />
+        <Route path="/step/1" element={<Step1Page />} />
       </Routes>
     </BrowserRouter>
   )
