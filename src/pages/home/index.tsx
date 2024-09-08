@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import Input from '../../components/input'
-import LargeButton from '../../components/large-button'
+import RectangleButton from '../../components/rectangle-button'
 import Logo from '../../components/logo'
 import * as S from './HomePage.style'
 import useProjectStore from '../../stores/project'
@@ -14,7 +14,7 @@ export default function HomePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    navigate('/step1')
+    navigate('/step/1')
   }
 
   const [isActve, setIsActive] = useState(false)
@@ -52,9 +52,9 @@ export default function HomePage() {
         <S.ButtonWrapper onSubmit={handleSubmit}>
           <Input inputType="projectName" />
           <Input inputType="date" />
-          <LargeButton isActive={isActve} buttonType="submit">
+          <RectangleButton isActive={isActve} buttonType="submit" size="large">
             Start
-          </LargeButton>
+          </RectangleButton>
         </S.ButtonWrapper>
       </S.RightSide>
     </S.Wrapper>
