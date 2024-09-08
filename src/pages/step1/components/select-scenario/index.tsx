@@ -133,7 +133,7 @@ const SelectScenario = () => {
           <RectangleButton
             isActive={scenario !== 0 ? true : false}
             size="medium"
-            onClick={() => navigate('/step2')}
+            onClick={() => navigate('/step/2')}
           >
             Next
           </RectangleButton>
