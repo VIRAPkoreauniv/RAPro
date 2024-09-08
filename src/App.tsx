@@ -1,12 +1,8 @@
-import useProjectStore, { IProjectState } from "./stores/project"
+import AppRouter from "./Router"
 
 function App() {
-  const projectName = useProjectStore((state: IProjectState)=> state.projectName)
   return (
-    <>
-      <>Hello</>
-      <p>{projectName}</p>
-    </>
+      <AppRouter />
   )
 }
 
