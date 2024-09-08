@@ -1,5 +1,6 @@
 import AppBar from '../../components/app-bar'
 import ProgressMenu from '../../components/progress-menu'
+import SelectScenario from './components/select-scenario'
 import * as S from './Step1Page.style'
 
 export default function Step1Page() {
@@ -8,9 +9,7 @@ export default function Step1Page() {
       <AppBar />
       <S.ColumnDivider>
         <ProgressMenu />
-        <div>
-          <p>step1</p>
-        </div>
+        <SelectScenario />
       </S.ColumnDivider>
     </S.Wrapper>
   )
