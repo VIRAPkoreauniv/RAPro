@@ -14,7 +14,7 @@ export default function HomePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    navigate('/step1')
+    navigate('/step/1')
   }
 
   const [isActve, setIsActive] = useState(false)
