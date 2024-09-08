@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4.5rem;
-  height: 90%;
   overflow-y: scroll;
 
   h1 {
