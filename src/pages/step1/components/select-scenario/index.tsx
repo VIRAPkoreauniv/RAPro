@@ -70,6 +70,10 @@ const SelectScenario = () => {
     }
   }, [receptor])
 
+  useEffect(() => {
+    setScenario(0)
+  }, [])
+
   return (
     <S.Wrapper>
       <h1>STEP 1 : Select a Site Scenario</h1>
@@ -121,18 +125,20 @@ const SelectScenario = () => {
       <p>
         ※ A diagram for the selected site scenario is visualized as follows.
       </p>
-      <S.Border>
-        <img src={scenarioImg} />
-      </S.Border>
-      <S.ButtonWrapper>
-        <RectangleButton
-          isActive={scenario !== 0 ? true : false}
-          size="medium"
-          onClick={() => navigate('/step2')}
-        >
-          Next
-        </RectangleButton>
-      </S.ButtonWrapper>
+      <S.ImgAndButton>
+        <S.Border>
+          <img src={scenarioImg} />
+        </S.Border>
+        <S.ButtonWrapper>
+          <RectangleButton
+            isActive={scenario !== 0 ? true : false}
+            size="medium"
+            onClick={() => navigate('/step2')}
+          >
+            Next
+          </RectangleButton>
+        </S.ButtonWrapper>
+      </S.ImgAndButton>
     </S.Wrapper>
   )
 }

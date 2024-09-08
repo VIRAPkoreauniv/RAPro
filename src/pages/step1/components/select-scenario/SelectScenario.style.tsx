@@ -32,6 +32,11 @@ export const SelectWrapper = styled.div`
   border-radius: 1rem;
   padding: 2rem;
 `
+export const ImgAndButton = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: flex-end;
+`
 
 export const Border = styled.div`
   display: flex;
