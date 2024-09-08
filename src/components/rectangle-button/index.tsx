@@ -1,11 +1,12 @@
 import { ReactNode } from 'react'
 import * as S from './RectangleButton.style'
 
-interface ILargeButton {
+interface IButton {
   children: ReactNode
   isActive: boolean
   size: 'large' | 'medium'
   buttonType?: 'button' | 'submit'
+  onClick?: () => void
 }
 
 const RectangleButton = ({
@@ -13,13 +14,15 @@ const RectangleButton = ({
   isActive,
   size,
   buttonType = 'button',
-}: ILargeButton) => {
+  onClick,
+}: IButton) => {
   return (
     <S.Wrapper
       type={buttonType}
       isActive={isActive}
       disabled={!isActive}
       size={size}
+      onClick={onClick}
     >
       {children}
     </S.Wrapper>

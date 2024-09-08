@@ -1,10 +1,71 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as S from './SelectScenario.style'
 import RectangleButton from '../../../../components/rectangle-button'
 import SCENARIO_DEFAULT from '../../../../assets/scenario/default.jpg'
+import {
+  PATHWAY_LIST,
+  PathwayType,
+  RECEPTOR_LIST,
+  ReceptorType,
+  SCENARIO_IMAGE_LIST,
+  SOURCE_LIST,
+  SourceType,
+} from '../../../../data/scenario'
+import getScenario from '../../../../utils/getScenario'
+import { useNavigate } from 'react-router-dom'
 
 const SelectScenario = () => {
-  const [scenario, setScenario] = useState<string | null>(null)
+  const navigate = useNavigate()
+
+  const [source, setSource] = useState<SourceType | null>(null)
+  const [pathway, setPathway] = useState<PathwayType | null>(null)
+  const [receptor, setReceptor] = useState<ReceptorType | null>(null)
+  const [scenarioImg, setScenarioImg] = useState(SCENARIO_DEFAULT)
+  const [scenario, setScenario] = useState<number | null>(null)
+
+  const handleChangeSource = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const source = e.target.value
+    setPathway(null)
+    setReceptor(null)
+
+    if (source === '---') {
+      setSource(null)
+    } else {
+      setSource(source as SourceType)
+    }
+  }
+
+  const handleChangePathway = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const pathway = e.target.value
+    setReceptor(null)
+
+    if (pathway === '---') {
+      setPathway(null)
+    } else {
+      setPathway(pathway as PathwayType)
+    }
+  }
+
+  const handleChangeReceptor = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const receptor = e.target.value
+
+    if (receptor === '---') {
+      setReceptor(null)
+    } else {
+      setReceptor(receptor as ReceptorType)
+    }
+  }
+
+  useEffect(() => {
+    if (source && pathway && receptor) {
+      const scenario = getScenario({ source, pathway, receptor })
+
+      if (scenario) {
+        setScenario(scenario)
+        setScenarioImg(SCENARIO_IMAGE_LIST[scenario])
+      }
+    }
+  }, [receptor])
 
   return (
     <S.Wrapper>
@@ -13,29 +74,44 @@ const SelectScenario = () => {
       <S.SelectWrapper>
         <S.OptionWrapper>
           <p>Source</p>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+          <select defaultValue="---" onChange={(e) => handleChangeSource(e)}>
+            <option>---</option>
+            {SOURCE_LIST.map((elem, idx) => {
+              return (
+                <option key={idx} value={elem}>
+                  {elem}
+                </option>
+              )
+            })}
           </select>
         </S.OptionWrapper>
         <S.OptionWrapper>
           <p>Pathway</p>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+          <select
+            defaultValue="---"
+            disabled={source !== null ? false : true}
+            onChange={(e) => handleChangePathway(e)}
+          >
+            <option>---</option>
+            {source &&
+              PATHWAY_LIST[source].map((elem) => {
+                return <option value={elem}>{elem}</option>
+              })}
           </select>
         </S.OptionWrapper>
         <S.OptionWrapper>
           <p>Receptor</p>
-          <select>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+          <select
+            defaultValue="---"
+            disabled={pathway !== null ? false : true}
+            onChange={(e) => handleChangeReceptor(e)}
+          >
+            <option>---</option>
+            {source &&
+              pathway &&
+              RECEPTOR_LIST[source][pathway].map((elem) => {
+                return <option value={elem}>{elem}</option>
+              })}
           </select>
         </S.OptionWrapper>
       </S.SelectWrapper>
@@ -43,10 +119,14 @@ const SelectScenario = () => {
         ※ A diagram for the selected site scenario is visualized as follows.
       </p>
       <S.Border>
-        <img src={SCENARIO_DEFAULT} />
+        <img src={scenarioImg} />
       </S.Border>
       <S.ButtonWrapper>
-        <RectangleButton isActive={false} size="medium">
+        <RectangleButton
+          isActive={scenario ? true : false}
+          size="medium"
+          onClick={() => navigate('/step2')}
+        >
           Next
         </RectangleButton>
       </S.ButtonWrapper>

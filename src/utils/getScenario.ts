@@ -1,11 +1,13 @@
+import { PathwayType, ReceptorType, SourceType } from '../data/scenario'
+
 interface IScenario {
-  source: string
-  pathway: string
-  receptor: string
+  source: SourceType
+  pathway: PathwayType
+  receptor: ReceptorType
 }
 
 const getScenario = ({ source, pathway, receptor }: IScenario) => {
-  if (source === 'Surfacial Soil') {
+  if (source === 'Surficial soil') {
     if (pathway === 'Direct contact') {
       switch (receptor) {
         case 'Ingestion':
@@ -17,14 +19,14 @@ const getScenario = ({ source, pathway, receptor }: IScenario) => {
         case 'Vegetable':
           return 4
         default:
-          return null
+          break
       }
     } else if (pathway === 'Volatilization>Atmospheric dispersion') {
       switch (receptor) {
         case 'Inhalation':
           return 6
         default:
-          return null
+          break
       }
     }
   } else if (source === 'Subsurface soil') {
@@ -35,21 +37,21 @@ const getScenario = ({ source, pathway, receptor }: IScenario) => {
         case 'Surface water swimming, fish consumption':
           return 11
         default:
-          return null
+          break
       }
     } else if (pathway === 'Volatilization>Atmospheric dispersion') {
       switch (receptor) {
         case 'Inhalation':
           return 8
         default:
-          return null
+          break
       }
     } else if (pathway === 'Volatilization>Vapor intrusion') {
       switch (receptor) {
         case 'Inhalation':
           return 9
         default:
-          return null
+          break
       }
     }
   } else if (source === 'Groundwater') {
@@ -60,21 +62,21 @@ const getScenario = ({ source, pathway, receptor }: IScenario) => {
         case 'Surface water swimming, fish consumption':
           return 16
         default:
-          return null
+          break
       }
     } else if (pathway === 'Volatilization>Atmospheric dispersion') {
       switch (receptor) {
         case 'Inhalation':
           return 13
         default:
-          return null
+          break
       }
     } else if (pathway === 'Volatilization>Vapor intrusion') {
       switch (receptor) {
         case 'Inhalation':
           return 14
         default:
-          return null
+          break
       }
     }
   }
