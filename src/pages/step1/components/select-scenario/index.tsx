@@ -13,15 +13,17 @@ import {
 } from '../../../../data/scenario'
 import getScenario from '../../../../utils/getScenario'
 import { useNavigate } from 'react-router-dom'
+import useProjectStore from '../../../../stores/project'
 
 const SelectScenario = () => {
   const navigate = useNavigate()
+
+  const { scenario, setScenario } = useProjectStore((set) => set)
 
   const [source, setSource] = useState<SourceType | null>(null)
   const [pathway, setPathway] = useState<PathwayType | null>(null)
   const [receptor, setReceptor] = useState<ReceptorType | null>(null)
   const [scenarioImg, setScenarioImg] = useState(SCENARIO_DEFAULT)
-  const [scenario, setScenario] = useState<number | null>(null)
 
   const handleChangeSource = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const source = e.target.value
@@ -62,6 +64,7 @@ const SelectScenario = () => {
 
       if (scenario) {
         setScenario(scenario)
+
         setScenarioImg(SCENARIO_IMAGE_LIST[scenario])
       }
     }
@@ -123,7 +126,7 @@ const SelectScenario = () => {
       </S.Border>
       <S.ButtonWrapper>
         <RectangleButton
-          isActive={scenario ? true : false}
+          isActive={scenario !== 0 ? true : false}
           size="medium"
           onClick={() => navigate('/step2')}
         >
