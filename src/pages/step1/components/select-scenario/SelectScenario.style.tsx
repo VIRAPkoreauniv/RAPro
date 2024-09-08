@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4.5rem;
+  height: 90%;
+  overflow-y: scroll;
 
   h1 {
     color: #000;
@@ -22,15 +24,29 @@ export const Wrapper = styled.div`
     line-height: normal;
   }
 `
+export const SelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: 1px solid var(--gray-middle);
+  border-radius: 1rem;
+  padding: 2rem;
+`
 
 export const Border = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 2rem;
-
   border: 1px solid var(--gray-middle);
   border-radius: 1rem;
   padding: 2rem;
+
+  img {
+    width: 90.9rem;
+    height: 35.4rem;
+  }
 `
 
 export const OptionWrapper = styled.div`
@@ -45,7 +61,6 @@ export const OptionWrapper = styled.div`
 `
 
 export const ButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  display: flex;
+  justify-content: flex-end;
 `
