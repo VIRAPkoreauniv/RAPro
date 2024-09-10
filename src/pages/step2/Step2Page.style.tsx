@@ -25,3 +25,16 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `
+export const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  p {
+    color: #000;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+`

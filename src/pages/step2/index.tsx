@@ -5,11 +5,16 @@ import * as S from './Step2Page.style'
 import { CHEMCIAL_LIST } from '../../data/chemical-name'
 import ToggleBox from '../../components/toggle-box'
 import useSystemStore from '../../stores/system'
+import { SCENARIO_PARAMS } from '../../data/scenario-params'
+import useProjectStore from '../../stores/project'
 
 export default function Step2Page() {
   const navigate = useNavigate()
 
+  const { scenario } = useProjectStore()
   const { isSourceOn, isPathwayOn, isReceptorOn } = useSystemStore()
+
+  const paramsList = SCENARIO_PARAMS[scenario]
 
   return (
     <Layout>
@@ -24,13 +29,34 @@ export default function Step2Page() {
           })}
         </select>
         <ToggleBox title="Source" isOpen={isSourceOn}>
-          <p>children</p>
+          <S.InputWrapper>
+            <p>Chemical of concern</p>
+            <input />
+          </S.InputWrapper>
+          <S.InputWrapper>
+            <p>Concentration</p>
+            <input />
+          </S.InputWrapper>
         </ToggleBox>
         <ToggleBox title="Pathway" isOpen={isPathwayOn}>
-          <p>children</p>
+          {paramsList.pathway.map((elem) => {
+            return (
+              <S.InputWrapper>
+                <p>{elem}</p>
+                <input />
+              </S.InputWrapper>
+            )
+          })}
         </ToggleBox>
         <ToggleBox title="Receptor" isOpen={isReceptorOn}>
-          <p>children</p>
+          {paramsList.receptor.map((elem) => {
+            return (
+              <S.InputWrapper>
+                <p>{elem}</p>
+                <input />
+              </S.InputWrapper>
+            )
+          })}
         </ToggleBox>
         <S.ButtonWrapper>
           <RectangleButton

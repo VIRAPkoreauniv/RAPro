@@ -22,6 +22,9 @@ export const Box = styled.div`
   border-radius: 1rem;
   border: 1px solid var(--gray-middle, #787878);
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 `
 export const Arrow = styled.img`
   width: 2rem;
