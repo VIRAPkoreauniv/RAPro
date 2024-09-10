@@ -13,12 +13,12 @@ import {
 } from '../../../../data/scenario'
 import getScenario from '../../../../utils/getScenario'
 import { useNavigate } from 'react-router-dom'
-import useProjectStore from '../../../../stores/project'
+import useScenarioStore from '../../../../stores/scenario'
 
 const SelectScenario = () => {
   const navigate = useNavigate()
 
-  const { scenario, setScenario } = useProjectStore((set) => set)
+  const { scenario, setScenario } = useScenarioStore((set) => set)
 
   const [source, setSource] = useState<SourceType | null>(null)
   const [pathway, setPathway] = useState<PathwayType | null>(null)

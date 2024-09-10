@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import * as S from './ToggleBox.style'
 import ARROW_UP from '../../assets/icon/arrow-up.svg'
 import ARROW_DOWN from '../../assets/icon/arrow-down.svg'
-import useSystemStore from '../../stores/system'
+import useInputUIStore from '../../stores/input-ui'
 
 interface IToggleBox {
   title: 'Source' | 'Pathway' | 'Receptor'
@@ -18,7 +18,7 @@ const ToggleBox = ({ title, isOpen, children }: IToggleBox) => {
     setIsSourceOn,
     setIsPathwayOn,
     setIsReceptorOn,
-  } = useSystemStore((set) => set)
+  } = useInputUIStore((set) => set)
 
   const handleArrowClick = () => {
     switch (title) {

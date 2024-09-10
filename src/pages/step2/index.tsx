@@ -4,15 +4,15 @@ import Layout from '../../layouts'
 import * as S from './Step2Page.style'
 import { CHEMCIAL_LIST } from '../../data/chemical-name'
 import ToggleBox from '../../components/toggle-box'
-import useSystemStore from '../../stores/system'
 import { SCENARIO_PARAMS } from '../../data/scenario-params'
 import useProjectStore from '../../stores/project'
+import useInputUIStore from '../../stores/input-ui'
 
 export default function Step2Page() {
   const navigate = useNavigate()
 
   const { scenario } = useProjectStore()
-  const { isSourceOn, isPathwayOn, isReceptorOn } = useSystemStore()
+  const { isSourceOn, isPathwayOn, isReceptorOn } = useInputUIStore()
 
   const paramsList = SCENARIO_PARAMS[scenario]
 
