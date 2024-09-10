@@ -40,6 +40,10 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
     border: none;
   }
+
+  input {
+    height: 2rem;
+  }
 `
 
 export default GlobalStyles
