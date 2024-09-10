@@ -8,9 +8,7 @@ import { useEffect, useState } from 'react'
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const { projectName, projectDate, resetProject } = useProjectStore(
-    (state) => state,
-  )
+  const { projectName, projectDate } = useProjectStore()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -20,7 +18,7 @@ export default function HomePage() {
   const [isActve, setIsActive] = useState(false)
 
   useEffect(() => {
-    resetProject()
+    localStorage.clear()
   }, [])
 
   useEffect(() => {

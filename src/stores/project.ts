@@ -8,7 +8,6 @@ export interface IProjectState {
   setProjectName: (projectName: string) => void
   setProjectDate: (date: string) => void
   setCurrStep: (currStep: number) => void
-  resetProject: () => void
 }
 
 const useProjectStore = create<IProjectState>()(
@@ -23,13 +22,6 @@ const useProjectStore = create<IProjectState>()(
         set((state: IProjectState) => ({ ...state, projectDate })),
       setCurrStep: (currStep: number) =>
         set((state: IProjectState) => ({ ...state, currStep })),
-      resetProject: () =>
-        set(() => ({
-          projectName: '',
-          projectDate: '',
-          scenario: 0,
-          currStep: 0,
-        })),
     })),
     {
       name: 'projectStore',
