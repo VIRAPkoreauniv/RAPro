@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <AppBar />
       <S.ColumnDivider>
         <ProgressMenu />
-        <div>{children}</div>
+        <S.Content>{children}</S.Content>
       </S.ColumnDivider>
     </S.Wrapper>
   )
