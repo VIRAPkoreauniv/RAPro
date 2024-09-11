@@ -1,3 +1,5 @@
+import { IChemicalData } from '../types/chemical.type'
+
 interface IChemicalData {
   Henry: number | null
   logKoclogKd: number | null

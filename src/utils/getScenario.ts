@@ -1,10 +1,4 @@
-import { PathwayType, ReceptorType, SourceType } from '../data/scenario'
-
-interface IScenario {
-  source: SourceType
-  pathway: PathwayType
-  receptor: ReceptorType
-}
+import { IScenario } from '../types/scenario.type'
 
 const getScenario = ({ source, pathway, receptor }: IScenario) => {
   if (source === 'Surficial soil') {

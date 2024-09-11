@@ -5,12 +5,14 @@ import Logo from '../../components/logo'
 import * as S from './HomePage.style'
 import useProjectStore from '../../stores/project'
 import { useEffect, useState } from 'react'
+import useInputDataStore from '../../stores/input-data'
+import useScenarioStore from '../../stores/scenario'
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const { projectName, projectDate, resetProject } = useProjectStore(
-    (state) => state,
-  )
+  const { projectName, projectDate, resetProject } = useProjectStore()
+  const { resetScenario } = useScenarioStore()
+  const { resetInputData } = useInputDataStore()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,6 +23,8 @@ export default function HomePage() {
 
   useEffect(() => {
     resetProject()
+    resetScenario()
+    resetInputData()
   }, [])
 
   useEffect(() => {

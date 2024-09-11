@@ -1,3 +1,5 @@
+import { IExposureData } from '../types/exposure.type'
+
 interface IExposureData {
   Setting: 'Residential' | 'Commercial'
   DepthBelowGradeToBaseOfFoundation: number
