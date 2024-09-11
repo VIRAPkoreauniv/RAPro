@@ -41,8 +41,12 @@ const GlobalStyles = createGlobalStyle`
     border: none;
   }
 
+  select {
+    height: 3rem;
+  }
+  
   input {
-    height: 2rem;
+    height: 3rem;
   }
 `
 

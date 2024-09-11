@@ -26,9 +26,10 @@ export const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `
 export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   gap: 2rem;
+  align-items: center;
 
   p {
     color: #000;

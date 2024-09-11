@@ -1,26 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-
-interface ISource {
-  chemicalOfConcern: string
-  concentration: number
-}
-interface IPathway {
-  soilType: string
-  Br?: number
-}
-interface IReceptor {
-  exposureType: string
-  RBAF?: number
-  AT?: number
-  EF?: number
-  ED?: number
-  BW?: number
-  IR?: number
-  RAF_d?: number
-  M?: number
-  SA?: number
-}
+import { IPathway, IReceptor, ISource } from '../types/input.type'
 
 export interface IInputDataState {
   source: ISource
@@ -36,15 +16,15 @@ const useInputDataStore = create<IInputDataState>()(
   persist(
     devtools((set) => ({
       source: {
-        chemicalOfConcern: '',
-        concentration: 0,
+        chemicalOfConcern: undefined,
+        concentration: undefined,
       },
       pathway: {
-        soilType: '',
+        soilType: undefined,
         Br: undefined,
       },
       receptor: {
-        exposureType: '',
+        exposureType: undefined,
         RBAF: undefined,
         AT: undefined,
         EF: undefined,
@@ -59,8 +39,14 @@ const useInputDataStore = create<IInputDataState>()(
         set((state) => ({
           source: {
             ...state.source,
-            chemicalOfConcern,
-            concentration,
+            chemicalOfConcern:
+              chemicalOfConcern !== undefined
+                ? chemicalOfConcern
+                : state.source.chemicalOfConcern,
+            concentration:
+              concentration !== undefined
+                ? concentration
+                : state.source.concentration,
           },
         })),
       updatePathway: ({ soilType, Br }: IPathway) =>
