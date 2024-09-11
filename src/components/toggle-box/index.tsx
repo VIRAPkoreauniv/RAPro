@@ -5,7 +5,13 @@ import ARROW_DOWN from '../../assets/icon/arrow-down.svg'
 import useInputUIStore from '../../stores/input-ui'
 
 interface IToggleBox {
-  title: 'Source' | 'Pathway' | 'Receptor'
+  title:
+    | 'Source'
+    | 'Pathway'
+    | 'Receptor'
+    | 'Site Information'
+    | 'Input Data'
+    | 'Results'
   isOpen: boolean
   children: ReactNode
 }
