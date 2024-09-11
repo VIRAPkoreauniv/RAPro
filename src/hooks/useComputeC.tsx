@@ -27,6 +27,7 @@ const useComputeC = () => {
   // 1. 필요한 값이 없다면 return null
   // 2. 계산
 
+  // TODO: 계산 불가 상황 구체화해서 적용 필요
   useEffect(() => {
     switch (scenario) {
       case 1:

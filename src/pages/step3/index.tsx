@@ -3,9 +3,10 @@ import { SCENARIO_IMAGE_LIST } from '../../data/scenario'
 import Layout from '../../layouts'
 import useProjectStore from '../../stores/project'
 import useScenarioStore from '../../stores/scenario'
-import useComputeC from '../../utils/useComputeC'
-import useComputeNC from '../../utils/useComputeNC'
+import useComputeC from '../../hooks/useComputeC'
+import useComputeNC from '../../hooks/useComputeNC'
 import * as S from './Step3Page.style'
+import Table from '../../components/table'
 
 export default function Step3Page() {
   const { C_Risk } = useComputeC()
@@ -24,16 +25,16 @@ export default function Step3Page() {
           <S.InfoWrapper>
             <S.LeftWrapper>
               <S.InputWrapper>
-                <p>Project Name</p>
+                <S.SectionTitle>Project Name</S.SectionTitle>
                 <input value={projectName} readOnly />
               </S.InputWrapper>
               <S.InputWrapper>
-                <p>Project Date</p>
+                <S.SectionTitle>Project Date</S.SectionTitle>
                 <input value={projectDate} readOnly />
               </S.InputWrapper>
             </S.LeftWrapper>
             <S.DiagramWrapper>
-              <p>Diagram</p>
+              <S.SectionTitle>Diagram</S.SectionTitle>
               <S.ScenarioImg
                 src={SCENARIO_IMAGE_LIST[scenario]}
                 alt={`Scenario ${scenario}`}
@@ -42,17 +43,40 @@ export default function Step3Page() {
           </S.InfoWrapper>
         </ToggleBox>
         <ToggleBox title="Input Data" isOpen={true}>
-          <p>dfd</p>
+          <S.InputDataWrapper>
+            <S.TableWrapper>
+              <S.SectionTitle>Source</S.SectionTitle>
+              <Table tableType="source" />
+            </S.TableWrapper>
+            <S.TableWrapper>
+              <S.SectionTitle>Pathway</S.SectionTitle>
+              <Table tableType="pathway" />
+            </S.TableWrapper>
+            <S.TableWrapper>
+              <S.SectionTitle>Receptor</S.SectionTitle>
+              <Table tableType="receptor" />
+            </S.TableWrapper>
+          </S.InputDataWrapper>
         </ToggleBox>
         <ToggleBox title="Results" isOpen={true}>
           <S.InputWrapper>
-            <p>C Risk</p>
-            {C_Risk && <input readOnly value={C_Risk} />}
+            <S.SectionTitle>C Risk</S.SectionTitle>
+            <input
+              readOnly
+              value={
+                C_Risk || 'A calculation error occurred. (data input error)'
+              }
+            />
           </S.InputWrapper>
           <S.InputWrapper>
-            <p>NC Risk</p>
-            {NC_Risk && <input readOnly value={NC_Risk} />}
-          </S.InputWrapper>{' '}
+            <S.SectionTitle>NC Risk</S.SectionTitle>
+            <input
+              readOnly
+              value={
+                NC_Risk || 'A calculation error occurred. (data input error)'
+              }
+            />
+          </S.InputWrapper>
         </ToggleBox>
       </S.Wrapper>
     </Layout>
