@@ -40,6 +40,14 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
     border: none;
   }
+
+  select {
+    height: 3rem;
+  }
+  
+  input {
+    height: 3rem;
+  }
 `
 
 export default GlobalStyles

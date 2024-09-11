@@ -13,12 +13,12 @@ import {
 } from '../../../../data/scenario'
 import getScenario from '../../../../utils/getScenario'
 import { useNavigate } from 'react-router-dom'
-import useProjectStore from '../../../../stores/project'
+import useScenarioStore from '../../../../stores/scenario'
 
 const SelectScenario = () => {
   const navigate = useNavigate()
 
-  const { scenario, setScenario } = useProjectStore((set) => set)
+  const { scenario, setScenario } = useScenarioStore((set) => set)
 
   const [source, setSource] = useState<SourceType | null>(null)
   const [pathway, setPathway] = useState<PathwayType | null>(null)
@@ -73,6 +73,14 @@ const SelectScenario = () => {
   useEffect(() => {
     setScenario(0)
   }, [])
+
+  const handleClickNext = () => {
+    if (scenario === 1 || scenario === 2 || scenario === 4 || scenario === 15) {
+      navigate('/step/2')
+    } else {
+      alert('준비 중 입니다.')
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -133,7 +141,7 @@ const SelectScenario = () => {
           <RectangleButton
             isActive={scenario !== 0 ? true : false}
             size="medium"
-            onClick={() => navigate('/step/2')}
+            onClick={handleClickNext}
           >
             Next
           </RectangleButton>
