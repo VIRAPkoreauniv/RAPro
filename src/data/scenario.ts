@@ -11,22 +11,7 @@ import SCENARIO13 from '../assets/scenario/scenario-13.jpg'
 import SCENARIO14 from '../assets/scenario/scenario-14.jpg'
 import SCENARIO15 from '../assets/scenario/scenario-15.jpg'
 import SCENARIO16 from '../assets/scenario/scenario-16.jpg'
-
-// option 렌더링용
-
-//TODO: 타입 정리 필요
-export type SourceType = 'Surficial soil' | 'Subsurface soil' | 'Groundwater'
-export type PathwayType =
-  | 'Direct contact'
-  | 'Leaching'
-  | 'Volatilization>Atmospheric dispersion'
-  | 'Volatilization>Vapor intrusion'
-export type ReceptorType =
-  | 'Ingestion'
-  | 'Dermal'
-  | 'Inhalation'
-  | 'Vegetable'
-  | 'Surface water swimming, fish consumption'
+import { PathwayType, SourceType } from '../types/scenario.type'
 
 export const SOURCE_LIST: SourceType[] = [
   'Surficial soil',

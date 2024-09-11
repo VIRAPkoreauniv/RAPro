@@ -4,16 +4,18 @@ import RectangleButton from '../../../../components/rectangle-button'
 import SCENARIO_DEFAULT from '../../../../assets/scenario/default.jpg'
 import {
   PATHWAY_LIST,
-  PathwayType,
   RECEPTOR_LIST,
-  ReceptorType,
   SCENARIO_IMAGE_LIST,
   SOURCE_LIST,
-  SourceType,
 } from '../../../../data/scenario'
 import getScenario from '../../../../utils/getScenario'
 import { useNavigate } from 'react-router-dom'
 import useScenarioStore from '../../../../stores/scenario'
+import {
+  PathwayType,
+  ReceptorType,
+  SourceType,
+} from '../../../../types/scenario.type'
 
 const SelectScenario = () => {
   const navigate = useNavigate()
