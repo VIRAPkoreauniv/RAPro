@@ -26,13 +26,17 @@ const Table = ({ tableType }: ITable) => {
     }
 
     return parameterObj[tableType]?.map((elem) => {
-      return (
-        <tr>
-          <td>{TABLE_PARAMS[tableType][elem].name}</td>
-          <td>{data[tableType as keyof DataType][elem]}</td>
-          <td>{TABLE_PARAMS[tableType][elem].type}</td>
-        </tr>
-      )
+      const value = data[tableType as keyof DataType][elem]
+
+      if (value) {
+        return (
+          <tr>
+            <td>{TABLE_PARAMS[tableType][elem].name}</td>
+            <td>{value}</td>
+            <td>{TABLE_PARAMS[tableType][elem].type}</td>
+          </tr>
+        )
+      }
     })
   }
 
