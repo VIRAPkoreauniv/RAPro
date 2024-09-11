@@ -66,21 +66,11 @@ export default function Step3Page() {
         <ToggleBox title="Results" isOpen={isResultOn}>
           <S.InputWrapper>
             <S.SectionTitle>C Risk</S.SectionTitle>
-            <input
-              readOnly
-              value={
-                C_Risk || 'A calculation error occurred. (data input error)'
-              }
-            />
+            <input readOnly value={C_Risk || 'No Data'} />
           </S.InputWrapper>
           <S.InputWrapper>
             <S.SectionTitle>NC Risk</S.SectionTitle>
-            <input
-              readOnly
-              value={
-                NC_Risk || 'A calculation error occurred. (data input error)'
-              }
-            />
+            <input readOnly value={NC_Risk || 'No Data'} />
           </S.InputWrapper>
         </ToggleBox>
         <S.ButtonWrapper>
