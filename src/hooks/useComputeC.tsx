@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import useInputDataStore from '../stores/input-data'
 import useScenarioStore from '../stores/scenario'
+import { CHEMICAL_DATABASE } from '../data/chemical'
 
 const useComputeC = () => {
   const { scenario } = useScenarioStore()
@@ -10,7 +11,9 @@ const useComputeC = () => {
 
   const Conc = source.concentration
   const Br = pathway.Br
-  const SF_o = 10
+  const SF_o = source.chemicalOfConcern
+    ? CHEMICAL_DATABASE[source.chemicalOfConcern].Sfo
+    : 0
   const EF = receptor.EF
   const ED = receptor.ED
   const IR = receptor.IR
