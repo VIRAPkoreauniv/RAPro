@@ -74,6 +74,14 @@ const SelectScenario = () => {
     setScenario(0)
   }, [])
 
+  const handleClickNext = () => {
+    if (scenario === 1 || scenario === 2 || scenario === 4 || scenario === 15) {
+      navigate('/step/2')
+    } else {
+      alert('준비 중 입니다.')
+    }
+  }
+
   return (
     <S.Wrapper>
       <h1>STEP 1 : Select a Site Scenario</h1>
@@ -133,7 +141,7 @@ const SelectScenario = () => {
           <RectangleButton
             isActive={scenario !== 0 ? true : false}
             size="medium"
-            onClick={() => navigate('/step/2')}
+            onClick={handleClickNext}
           >
             Next
           </RectangleButton>
