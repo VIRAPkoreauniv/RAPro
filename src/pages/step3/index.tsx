@@ -1,7 +1,10 @@
+import useComputeC from '../../utils/useComputeC'
+
 export default function Step3Page() {
+  const { C_Risk } = useComputeC()
   return (
     <>
-      <p>step3</p>
+      <h1>C Risk : {C_Risk}</h1>
     </>
   )
 }
