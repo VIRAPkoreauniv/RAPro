@@ -53,7 +53,8 @@ const useInputDataStore = create<IInputDataState>()(
         set((state) => ({
           pathway: {
             ...state.pathway,
-            soilType,
+            soilType:
+              soilType !== undefined ? soilType : state.pathway.soilType,
             Br: Br !== undefined ? Br : state.pathway.Br,
           },
         })),
@@ -72,7 +73,10 @@ const useInputDataStore = create<IInputDataState>()(
         set((state) => ({
           receptor: {
             ...state.receptor,
-            exposureType,
+            exposureType:
+              exposureType !== undefined
+                ? exposureType
+                : state.receptor.exposureType,
             RBAF: RBAF !== undefined ? RBAF : state.receptor.RBAF,
             AT: AT !== undefined ? AT : state.receptor.AT,
             EF: EF !== undefined ? EF : state.receptor.EF,

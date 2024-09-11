@@ -110,6 +110,7 @@ export default function Step2Page() {
     { inputType, valueType }: IParams,
     elem: ReceptorInputType,
   ) => {
+    console.log(elem)
     switch (inputType) {
       case 'dropdown':
         return (
