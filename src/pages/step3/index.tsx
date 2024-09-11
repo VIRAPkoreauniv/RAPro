@@ -7,6 +7,7 @@ import useComputeC from '../../hooks/useComputeC'
 import useComputeNC from '../../hooks/useComputeNC'
 import * as S from './Step3Page.style'
 import Table from '../../components/table'
+import useSummaryUIStore from '../../stores/summary-ui'
 
 export default function Step3Page() {
   const { C_Risk } = useComputeC()
@@ -15,13 +16,15 @@ export default function Step3Page() {
   const { projectName, projectDate } = useProjectStore()
   const { scenario } = useScenarioStore()
 
-  //TODO: toggle 상태 관리 연결
+  const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
+
+  //TODO: exit 버튼 홈으로 연결
   return (
     <Layout>
       <S.Wrapper>
         <S.Title>STEP 3 : Summary</S.Title>
         <S.Info>Summary of the risk assessment is provided. </S.Info>
-        <ToggleBox title="Site Information" isOpen={true}>
+        <ToggleBox title="Site Information" isOpen={isInformationOn}>
           <S.InfoWrapper>
             <S.LeftWrapper>
               <S.InputWrapper>
@@ -42,7 +45,7 @@ export default function Step3Page() {
             </S.DiagramWrapper>
           </S.InfoWrapper>
         </ToggleBox>
-        <ToggleBox title="Input Data" isOpen={true}>
+        <ToggleBox title="Input Data" isOpen={isDataOn}>
           <S.InputDataWrapper>
             <S.TableWrapper>
               <S.SectionTitle>Source</S.SectionTitle>
@@ -58,7 +61,7 @@ export default function Step3Page() {
             </S.TableWrapper>
           </S.InputDataWrapper>
         </ToggleBox>
-        <ToggleBox title="Results" isOpen={true}>
+        <ToggleBox title="Results" isOpen={isResultOn}>
           <S.InputWrapper>
             <S.SectionTitle>C Risk</S.SectionTitle>
             <input
