@@ -14,9 +14,9 @@ export interface ISummaryUIState {
 const useSummaryUIStore = create<ISummaryUIState>()(
   persist(
     devtools((set) => ({
-      isInformationOn: false,
-      isDataOn: false,
-      isResultOn: false,
+      isInformationOn: true,
+      isDataOn: true,
+      isResultOn: true,
       setIsInformationOn: (isInformationOn: boolean) =>
         set((state: ISummaryUIState) => ({ ...state, isInformationOn })),
       setIsDataOn: (isDataOn: boolean) =>
@@ -25,9 +25,9 @@ const useSummaryUIStore = create<ISummaryUIState>()(
         set((state: ISummaryUIState) => ({ ...state, isResultOn })),
       resetSummaryUI: () =>
         set(() => ({
-          isInformationOn: false,
-          isDataOn: false,
-          isResultOn: false,
+          isInformationOn: true,
+          isDataOn: true,
+          isResultOn: true,
         })),
     })),
     {

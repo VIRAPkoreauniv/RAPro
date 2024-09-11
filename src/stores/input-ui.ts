@@ -15,9 +15,9 @@ export interface IInputUIState {
 const useInputUIStore = create<IInputUIState>()(
   persist(
     devtools((set) => ({
-      isSourceOn: false,
-      isPathwayOn: false,
-      isReceptorOn: false,
+      isSourceOn: true,
+      isPathwayOn: true,
+      isReceptorOn: true,
       setIsSourceOn: (isSourceOn: boolean) =>
         set((state: IInputUIState) => ({ ...state, isSourceOn })),
       setIsPathwayOn: (isPathwayOn: boolean) =>
@@ -26,9 +26,9 @@ const useInputUIStore = create<IInputUIState>()(
         set((state: IInputUIState) => ({ ...state, isReceptorOn })),
       resetInputUI: () =>
         set(() => ({
-          isSourceOn: false,
-          isPathwayOn: false,
-          isReceptorOn: false,
+          isSourceOn: true,
+          isPathwayOn: true,
+          isReceptorOn: true,
         })),
     })),
     {
