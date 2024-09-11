@@ -1,5 +1,21 @@
 import { IExposureData } from '../types/exposure.type'
 
+interface IExposureData {
+  Setting: 'Residential' | 'Commercial'
+  DepthBelowGradeToBaseOfFoundation: number
+  FoundationThickness: number
+  FractionOfFoundationAreaWithCracks: number
+  EnclosedSpaceFloorArea: number
+  EnclosedSpaceHeight: number
+  IndoorAirExchangeRate: number
+  BuildingVentilationRate: number
+  QsoilQbuilding: number
+  AverageVaporFlowRateIntoBldg: number | null
+  eta: number | null
+  Abf: number
+  Hb: number
+}
+
 export const EXPOSURE_DATABASE: Record<string, IExposureData> = {
   'Closed crawl space w/ slab': {
     Setting: 'Residential',
