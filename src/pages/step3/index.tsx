@@ -8,8 +8,11 @@ import useComputeNC from '../../hooks/useComputeNC'
 import * as S from './Step3Page.style'
 import Table from '../../components/table'
 import useSummaryUIStore from '../../stores/summary-ui'
+import RectangleButton from '../../components/rectangle-button'
+import { useNavigate } from 'react-router-dom'
 
 export default function Step3Page() {
+  const navigate = useNavigate()
   const { C_Risk } = useComputeC()
   const { NC_Risk } = useComputeNC()
 
@@ -18,7 +21,6 @@ export default function Step3Page() {
 
   const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
 
-  //TODO: exit 버튼 홈으로 연결
   return (
     <Layout>
       <S.Wrapper>
@@ -81,6 +83,21 @@ export default function Step3Page() {
             />
           </S.InputWrapper>
         </ToggleBox>
+        <S.ButtonWrapper>
+          <RectangleButton
+            isActive={true}
+            size="medium"
+            onClick={() => {
+              const moveToHome = confirm(
+                'Shall we return to the main page? (The data will be reset.)',
+              )
+
+              moveToHome && navigate('/')
+            }}
+          >
+            Finish
+          </RectangleButton>
+        </S.ButtonWrapper>
       </S.Wrapper>
     </Layout>
   )

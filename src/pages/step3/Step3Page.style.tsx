@@ -63,3 +63,7 @@ export const TableWrapper = styled.div`
   flex-direction: column;
   gap: 2rem;
 `
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
