@@ -15,10 +15,7 @@ const useScenarioStore = create<IScenarioState>()(
         set((state: IScenarioState) => ({ ...state, scenario })),
       resetScenario: () =>
         set(() => ({
-          projectName: '',
-          projectDate: '',
           scenario: 0,
-          currStep: 0,
         })),
     })),
     {

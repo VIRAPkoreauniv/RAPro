@@ -9,6 +9,7 @@ export interface IInputDataState {
   updateSource: (source: ISource) => void
   updatePathway: (pathway: IPathway) => void
   updateReceptor: (receptor: IReceptor) => void
+  resetInputData: () => void
 }
 
 //TODO: 1,2,4,15 외의 시나리오 작업 시 파라미터 추가 필요
@@ -86,6 +87,29 @@ const useInputDataStore = create<IInputDataState>()(
             RAF_d: RAF_d !== undefined ? RAF_d : state.receptor.RAF_d,
             M: M !== undefined ? M : state.receptor.M,
             SA: SA !== undefined ? SA : state.receptor.SA,
+          },
+        })),
+      resetInputData: () =>
+        set(() => ({
+          source: {
+            chemicalOfConcern: undefined,
+            concentration: undefined,
+          },
+          pathway: {
+            soilType: undefined,
+            Br: undefined,
+          },
+          receptor: {
+            exposureType: undefined,
+            RBAF: undefined,
+            AT: undefined,
+            EF: undefined,
+            ED: undefined,
+            BW: undefined,
+            IR: undefined,
+            RAF_d: undefined,
+            M: undefined,
+            SA: undefined,
           },
         })),
     })),
