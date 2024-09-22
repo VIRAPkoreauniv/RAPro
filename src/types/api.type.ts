@@ -1,6 +1,6 @@
 import { IPathway, IReceptor, ISource } from './input.type'
 
-export interface IcRiskRequest {
+export interface IRiskRequest {
   scenario: number
   source: ISource
   pathway: IPathway
@@ -9,4 +9,8 @@ export interface IcRiskRequest {
 
 export interface IcRiskResponse {
   C_Risk: number | null
+}
+
+export interface IncRiskResponse {
+  NC_Risk: number | null
 }

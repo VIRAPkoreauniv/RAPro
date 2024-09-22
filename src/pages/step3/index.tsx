@@ -3,24 +3,25 @@ import { SCENARIO_IMAGE_LIST } from '../../data/scenario'
 import Layout from '../../layouts'
 import useProjectStore from '../../stores/project'
 import useScenarioStore from '../../stores/scenario'
-import useComputeNC from '../../hooks/useComputeNC'
 import * as S from './Step3Page.style'
 import Table from '../../components/table'
 import useSummaryUIStore from '../../stores/summary-ui'
 import RectangleButton from '../../components/rectangle-button'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { postCRisk } from '../../apis/computeAPI'
+import { postCRisk, postNCRisk } from '../../apis/computeAPI'
 import useInputDataStore from '../../stores/input-data'
 import { useEffect } from 'react'
 import { AxiosResponse } from 'axios'
-import { IcRiskRequest, IcRiskResponse } from '../../types/api.type'
+import {
+  IRiskRequest,
+  IcRiskResponse,
+  IncRiskResponse,
+} from '../../types/api.type'
 
 export default function Step3Page() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
-
-  const { NC_Risk } = useComputeNC()
 
   const { projectName, projectDate } = useProjectStore()
   const { scenario } = useScenarioStore()
@@ -28,11 +29,11 @@ export default function Step3Page() {
   const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
 
   const computeCRisk = useMutation<
-    AxiosResponse<IcRiskResponse, IcRiskRequest>,
+    AxiosResponse<IcRiskResponse, IRiskRequest>,
     Error,
-    IcRiskRequest
+    IRiskRequest
   >({
-    mutationFn: (data: IcRiskRequest) => {
+    mutationFn: (data: IRiskRequest) => {
       return postCRisk(data)
     },
     onSuccess: () => {
@@ -43,8 +44,25 @@ export default function Step3Page() {
     },
   })
 
+  const computeNCRisk = useMutation<
+    AxiosResponse<IncRiskResponse, IRiskRequest>,
+    Error,
+    IRiskRequest
+  >({
+    mutationFn: (data: IRiskRequest) => {
+      return postNCRisk(data)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['nc-risk'] })
+    },
+    onError: (err) => {
+      console.error('Error:', err)
+    },
+  })
+
   useEffect(() => {
     computeCRisk.mutate({ scenario, source, pathway, receptor })
+    computeNCRisk.mutate({ scenario, source, pathway, receptor })
   }, [])
 
   return (
@@ -101,7 +119,12 @@ export default function Step3Page() {
           </S.InputWrapper>
           <S.InputWrapper>
             <S.SectionTitle>NC Risk</S.SectionTitle>
-            <input readOnly value={NC_Risk || 'No Data'} />
+            {computeNCRisk.isSuccess && (
+              <input
+                readOnly
+                value={computeNCRisk.data.data.NC_Risk || 'No Data'}
+              />
+            )}
           </S.InputWrapper>
         </ToggleBox>
         <S.ButtonWrapper>
