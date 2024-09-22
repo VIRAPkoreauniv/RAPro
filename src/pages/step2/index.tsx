@@ -79,6 +79,19 @@ export default function Step2Page() {
   ) => {
     switch (inputType) {
       case 'dropdown':
+        // fetch(
+        //   `https://rapro-api.onrender.com/soil-data?name=${pathway.soilType}`,
+        // )
+        //   .then((response) => {
+        //     if (response.ok) {
+        //       return response.json()
+        //     } else {
+        //       throw new Error('네트워크 응답에 문제가 있습니다.')
+        //     }
+        //   })
+        //   .then((data) => {
+        //     console.log(data)
+        //   })
         return (
           <select
             defaultValue="---"
