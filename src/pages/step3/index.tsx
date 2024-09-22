@@ -3,23 +3,49 @@ import { SCENARIO_IMAGE_LIST } from '../../data/scenario'
 import Layout from '../../layouts'
 import useProjectStore from '../../stores/project'
 import useScenarioStore from '../../stores/scenario'
-import useComputeC from '../../hooks/useComputeC'
 import useComputeNC from '../../hooks/useComputeNC'
 import * as S from './Step3Page.style'
 import Table from '../../components/table'
 import useSummaryUIStore from '../../stores/summary-ui'
 import RectangleButton from '../../components/rectangle-button'
 import { useNavigate } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { postCRisk } from '../../apis/computeAPI'
+import useInputDataStore from '../../stores/input-data'
+import { useEffect } from 'react'
+import { AxiosResponse } from 'axios'
+import { IcRiskRequest, IcRiskResponse } from '../../types/api.type'
 
 export default function Step3Page() {
   const navigate = useNavigate()
-  const { C_Risk } = useComputeC()
+  const queryClient = useQueryClient()
+
   const { NC_Risk } = useComputeNC()
 
   const { projectName, projectDate } = useProjectStore()
   const { scenario } = useScenarioStore()
-
+  const { source, pathway, receptor } = useInputDataStore()
   const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
+
+  const computeCRisk = useMutation<
+    AxiosResponse<IcRiskResponse, IcRiskRequest>,
+    Error,
+    IcRiskRequest
+  >({
+    mutationFn: (data: IcRiskRequest) => {
+      return postCRisk(data)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['c-risk'] })
+    },
+    onError: (err) => {
+      console.error('Error:', err)
+    },
+  })
+
+  useEffect(() => {
+    computeCRisk.mutate({ scenario, source, pathway, receptor })
+  }, [])
 
   return (
     <Layout>
@@ -66,7 +92,12 @@ export default function Step3Page() {
         <ToggleBox title="Results" isOpen={isResultOn}>
           <S.InputWrapper>
             <S.SectionTitle>C Risk</S.SectionTitle>
-            <input readOnly value={C_Risk || 'No Data'} />
+            {computeCRisk.isSuccess && (
+              <input
+                readOnly
+                value={computeCRisk.data.data.C_Risk || 'No Data'}
+              />
+            )}
           </S.InputWrapper>
           <S.InputWrapper>
             <S.SectionTitle>NC Risk</S.SectionTitle>
@@ -81,7 +112,6 @@ export default function Step3Page() {
               const moveToHome = confirm(
                 'Shall we return to the main page? (The data will be reset.)',
               )
-
               moveToHome && navigate('/')
             }}
           >
