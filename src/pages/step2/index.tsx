@@ -48,16 +48,19 @@ export default function Step2Page() {
   const { data: SOIL_LIST } = useQuery({
     queryKey: ['soil'],
     queryFn: getSoilList,
+    staleTime: Infinity,
   })
 
   const { data: CHEMICAL_LIST } = useQuery({
     queryKey: ['chemical'],
     queryFn: getChemicalList,
+    staleTime: Infinity,
   })
 
   const { data: EXPOSURE_LIST } = useQuery({
     queryKey: ['exposure'],
     queryFn: getExposureList,
+    staleTime: Infinity,
   })
 
   const renderSourceInputElement = (
