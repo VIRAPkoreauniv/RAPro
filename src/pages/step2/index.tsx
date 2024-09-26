@@ -22,6 +22,8 @@ import {
 import { SOIL_LIST } from '../../data/soil-name'
 import { EXPOSURE_LIST } from '../../data/exposure-name'
 import { useEffect, useState } from 'react'
+import { useComputeCRisk } from '../../hooks/useComputeCRisk'
+import { useComputeNCRisk } from '../../hooks/useComputeNCRisk'
 
 export default function Step2Page() {
   const navigate = useNavigate()
@@ -40,6 +42,7 @@ export default function Step2Page() {
 
   const paramsList = SCENARIO_PARAMS[scenario]
 
+  // TODO: 드롭다운 로직 api
   const renderSourceInputElement = (
     { inputType, valueType }: IParams,
     elem: SourceInputType,
@@ -79,19 +82,6 @@ export default function Step2Page() {
   ) => {
     switch (inputType) {
       case 'dropdown':
-        // fetch(
-        //   `https://rapro-api.onrender.com/soil-data?name=${pathway.soilType}`,
-        // )
-        //   .then((response) => {
-        //     if (response.ok) {
-        //       return response.json()
-        //     } else {
-        //       throw new Error('네트워크 응답에 문제가 있습니다.')
-        //     }
-        //   })
-        //   .then((data) => {
-        //     console.log(data)
-        //   })
         return (
           <select
             defaultValue="---"
@@ -150,6 +140,15 @@ export default function Step2Page() {
       default:
         break
     }
+  }
+
+  const { mutate: mutateC } = useComputeCRisk()
+  const { mutate: mutateNC } = useComputeNCRisk()
+
+  const handleClickNext = () => {
+    mutateNC({ scenario, source, pathway, receptor })
+    mutateC({ scenario, source, pathway, receptor })
+    navigate('/step/3')
   }
 
   useEffect(() => {
@@ -215,7 +214,7 @@ export default function Step2Page() {
           <RectangleButton
             isActive={isNextButtonActive}
             size="medium"
-            onClick={() => navigate('/step/3')}
+            onClick={() => handleClickNext()}
           >
             Next
           </RectangleButton>

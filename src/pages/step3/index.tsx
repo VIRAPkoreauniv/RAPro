@@ -8,62 +8,15 @@ import Table from '../../components/table'
 import useSummaryUIStore from '../../stores/summary-ui'
 import RectangleButton from '../../components/rectangle-button'
 import { useNavigate } from 'react-router-dom'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { postCRisk, postNCRisk } from '../../apis/computeAPI'
-import useInputDataStore from '../../stores/input-data'
-import { useEffect } from 'react'
-import { AxiosResponse } from 'axios'
-import {
-  IRiskRequest,
-  IcRiskResponse,
-  IncRiskResponse,
-} from '../../types/api.type'
+import useResultStore from '../../stores/result'
 
 export default function Step3Page() {
   const navigate = useNavigate()
-  const queryClient = useQueryClient()
 
   const { projectName, projectDate } = useProjectStore()
   const { scenario } = useScenarioStore()
-  const { source, pathway, receptor } = useInputDataStore()
   const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
-
-  const computeCRisk = useMutation<
-    AxiosResponse<IcRiskResponse, IRiskRequest>,
-    Error,
-    IRiskRequest
-  >({
-    mutationFn: (data: IRiskRequest) => {
-      return postCRisk(data)
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['c-risk'] })
-    },
-    onError: (err) => {
-      console.error('Error:', err)
-    },
-  })
-
-  const computeNCRisk = useMutation<
-    AxiosResponse<IncRiskResponse, IRiskRequest>,
-    Error,
-    IRiskRequest
-  >({
-    mutationFn: (data: IRiskRequest) => {
-      return postNCRisk(data)
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['nc-risk'] })
-    },
-    onError: (err) => {
-      console.error('Error:', err)
-    },
-  })
-
-  useEffect(() => {
-    computeCRisk.mutate({ scenario, source, pathway, receptor })
-    computeNCRisk.mutate({ scenario, source, pathway, receptor })
-  }, [])
+  const { C_Risk, NC_Risk } = useResultStore()
 
   return (
     <Layout>
@@ -110,21 +63,11 @@ export default function Step3Page() {
         <ToggleBox title="Results" isOpen={isResultOn}>
           <S.InputWrapper>
             <S.SectionTitle>C Risk</S.SectionTitle>
-            {computeCRisk.isSuccess && (
-              <input
-                readOnly
-                value={computeCRisk.data.data.C_Risk || 'No Data'}
-              />
-            )}
+            <input readOnly value={C_Risk || 'No Data'} />
           </S.InputWrapper>
           <S.InputWrapper>
             <S.SectionTitle>NC Risk</S.SectionTitle>
-            {computeNCRisk.isSuccess && (
-              <input
-                readOnly
-                value={computeNCRisk.data.data.NC_Risk || 'No Data'}
-              />
-            )}
+            <input readOnly value={NC_Risk || 'No Data'} />
           </S.InputWrapper>
         </ToggleBox>
         <S.ButtonWrapper>
