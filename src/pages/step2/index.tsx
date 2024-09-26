@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom'
 import RectangleButton from '../../components/rectangle-button'
 import Layout from '../../layouts'
 import * as S from './Step2Page.style'
-import { CHEMCIAL_LIST } from '../../data/chemical-name'
 import ToggleBox from '../../components/toggle-box'
 import { SCENARIO_PARAMS } from '../../data/scenario-params'
 import useInputUIStore from '../../stores/input-ui'
@@ -19,9 +18,15 @@ import {
   ReceptorInputType,
   SourceInputType,
 } from '../../types/input.type'
-import { SOIL_LIST } from '../../data/soil-name'
-import { EXPOSURE_LIST } from '../../data/exposure-name'
 import { useEffect, useState } from 'react'
+import { useComputeCRisk } from '../../hooks/useComputeCRisk'
+import { useComputeNCRisk } from '../../hooks/useComputeNCRisk'
+import {
+  getChemicalList,
+  getExposureList,
+  getSoilList,
+} from '../../apis/computeAPI'
+import { useQuery } from '@tanstack/react-query'
 
 export default function Step2Page() {
   const navigate = useNavigate()
@@ -40,6 +45,24 @@ export default function Step2Page() {
 
   const paramsList = SCENARIO_PARAMS[scenario]
 
+  const { data: SOIL_LIST } = useQuery({
+    queryKey: ['soil'],
+    queryFn: getSoilList,
+    staleTime: Infinity,
+  })
+
+  const { data: CHEMICAL_LIST } = useQuery({
+    queryKey: ['chemical'],
+    queryFn: getChemicalList,
+    staleTime: Infinity,
+  })
+
+  const { data: EXPOSURE_LIST } = useQuery({
+    queryKey: ['exposure'],
+    queryFn: getExposureList,
+    staleTime: Infinity,
+  })
+
   const renderSourceInputElement = (
     { inputType, valueType }: IParams,
     elem: SourceInputType,
@@ -53,7 +76,7 @@ export default function Step2Page() {
             onChange={(e) => updateSource({ [elem]: e.target.value })}
           >
             <option value="">---</option>
-            {CHEMCIAL_LIST.map((elem) => {
+            {CHEMICAL_LIST?.data.map((elem: string) => {
               return <option>{elem}</option>
             })}
           </select>
@@ -86,7 +109,7 @@ export default function Step2Page() {
             onChange={(e) => updatePathway({ [elem]: e.target.value })}
           >
             <option value="">---</option>
-            {SOIL_LIST.map((elem) => {
+            {SOIL_LIST?.data.map((elem: string) => {
               return <option>{elem}</option>
             })}
           </select>
@@ -119,7 +142,7 @@ export default function Step2Page() {
             onChange={(e) => updateReceptor({ [elem]: e.target.value })}
           >
             <option value="">---</option>
-            {EXPOSURE_LIST.map((elem) => {
+            {EXPOSURE_LIST?.data.map((elem: string) => {
               return <option>{elem}</option>
             })}
           </select>
@@ -137,6 +160,15 @@ export default function Step2Page() {
       default:
         break
     }
+  }
+
+  const { mutate: mutateC } = useComputeCRisk()
+  const { mutate: mutateNC } = useComputeNCRisk()
+
+  const handleClickNext = () => {
+    mutateNC({ scenario, source, pathway, receptor })
+    mutateC({ scenario, source, pathway, receptor })
+    navigate('/step/3')
   }
 
   useEffect(() => {
@@ -202,7 +234,7 @@ export default function Step2Page() {
           <RectangleButton
             isActive={isNextButtonActive}
             size="medium"
-            onClick={() => navigate('/step/3')}
+            onClick={() => handleClickNext()}
           >
             Next
           </RectangleButton>

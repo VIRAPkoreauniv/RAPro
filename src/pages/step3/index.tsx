@@ -3,23 +3,20 @@ import { SCENARIO_IMAGE_LIST } from '../../data/scenario'
 import Layout from '../../layouts'
 import useProjectStore from '../../stores/project'
 import useScenarioStore from '../../stores/scenario'
-import useComputeC from '../../hooks/useComputeC'
-import useComputeNC from '../../hooks/useComputeNC'
 import * as S from './Step3Page.style'
 import Table from '../../components/table'
 import useSummaryUIStore from '../../stores/summary-ui'
 import RectangleButton from '../../components/rectangle-button'
 import { useNavigate } from 'react-router-dom'
+import useResultStore from '../../stores/result'
 
 export default function Step3Page() {
   const navigate = useNavigate()
-  const { C_Risk } = useComputeC()
-  const { NC_Risk } = useComputeNC()
 
   const { projectName, projectDate } = useProjectStore()
   const { scenario } = useScenarioStore()
-
   const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
+  const { C_Risk, NC_Risk } = useResultStore()
 
   return (
     <Layout>
@@ -81,7 +78,6 @@ export default function Step3Page() {
               const moveToHome = confirm(
                 'Shall we return to the main page? (The data will be reset.)',
               )
-
               moveToHome && navigate('/')
             }}
           >
