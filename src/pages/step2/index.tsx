@@ -162,13 +162,16 @@ export default function Step2Page() {
     }
   }
 
-  const { mutate: mutateC } = useComputeCRisk()
-  const { mutate: mutateNC } = useComputeNCRisk()
+  const { mutate: mutateC, isSuccess: isSuccessC } = useComputeCRisk()
+  const { mutate: mutateNC, isSuccess: isSuccessNC } = useComputeNCRisk()
 
   const handleClickNext = () => {
     mutateNC({ scenario, source, pathway, receptor })
     mutateC({ scenario, source, pathway, receptor })
-    navigate('/step/3')
+
+    if (isSuccessC && isSuccessNC) {
+      navigate('/step/3')
+    }
   }
 
   useEffect(() => {
