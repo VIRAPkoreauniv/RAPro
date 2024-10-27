@@ -3,23 +3,6 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   background-color: var(--background);
   padding: 2rem;
-
-  h1 {
-    color: #000;
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    padding-bottom: 10px;
-  }
-
-  p {
-    color: #000;
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
 `
 
 export const MenuWrapper = styled.div`

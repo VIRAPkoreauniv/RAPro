@@ -1,8 +1,8 @@
 import * as S from './Preliminary.style'
 import { useQuery } from '@tanstack/react-query'
 import { getChemicalList } from '../../../../apis/computeAPI'
-import { useEffect, useState } from 'react'
-import HomeNextButtons from '../../../../components/home-next-buttons'
+import { useEffect } from 'react'
+import NavigationButtons from '../../../../components/navigation-buttons'
 import {
   PATHWAY_LIST,
   RECEPTOR_LIST,
@@ -191,7 +191,7 @@ const PreliminaryStep1 = () => {
           <img src={SCENARIO_IMAGE_LIST[scenario]} />
         </>
       )}
-      <HomeNextButtons nextLink="/step/2" isNextOn={!!scenario} />
+      <NavigationButtons nextLink="/step/2" isNextOn={!!scenario} />
     </S.Wrapper>
   )
 }

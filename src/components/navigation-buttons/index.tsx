@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import useProjectStore from '../../stores/project'
 
-const HomeNextButtons = ({
+const NavigationButtons = ({
   isNextOn,
   nextLink,
 }: {
@@ -9,17 +10,31 @@ const HomeNextButtons = ({
   nextLink: string
 }) => {
   const navigate = useNavigate()
+  const { currStep } = useProjectStore()
 
   const handleNext = () => {
     if (isNextOn) {
-      navigate('/step/2')
+      navigate(nextLink)
     }
+  }
+
+  if (currStep === 1) {
+    return (
+      <Wrapper>
+        <Link to="/">
+          <HomeButton>Home</HomeButton>
+        </Link>
+        <NextButton onClick={handleNext} isNextOn={isNextOn}>
+          Next {'>'}
+        </NextButton>
+      </Wrapper>
+    )
   }
 
   return (
     <Wrapper>
-      <Link to="/">
-        <HomeButton>Home</HomeButton>
+      <Link to={`/step/${currStep - 1}`}>
+        <HomeButton>{'<'} Back</HomeButton>
       </Link>
       <NextButton onClick={handleNext} isNextOn={isNextOn}>
         Next {'>'}
@@ -28,7 +43,7 @@ const HomeNextButtons = ({
   )
 }
 
-export default HomeNextButtons
+export default NavigationButtons
 
 const Wrapper = styled.div`
   display: flex;
