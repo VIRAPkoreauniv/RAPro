@@ -1,9 +1,8 @@
-import * as S from './Input.style'
-import FolderIcon from '../../assets/icon/folder.svg'
-import DateIcon from '../../assets/icon/calendar.svg'
-import useProjectStore from '../../stores/project'
+import * as S from './StartInput.style'
+import FolderIcon from '../../../assets/icon/folder.svg'
+import DateIcon from '../../../assets/icon/calendar.svg'
 import { UseFormRegister } from 'react-hook-form'
-import { StartFormValues } from '../../pages/home'
+import { StartFormValues } from '../../../pages/home'
 
 interface IInput {
   label: 'projectName' | 'projectDate'
@@ -25,19 +24,7 @@ const INPUT_LIST = {
   },
 }
 
-const Input = ({ label, register }: IInput) => {
-  const { setProjectName, setProjectDate } = useProjectStore((state) => state)
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-
-    if (label === 'projectName') {
-      setProjectName(value)
-    } else if (label === 'projectDate') {
-      setProjectDate(value)
-    }
-  }
-
+const StartInput = ({ label, register }: IInput) => {
   return (
     <S.Wrapper>
       <img src={INPUT_LIST[label].icon} alt="" />
@@ -50,4 +37,4 @@ const Input = ({ label, register }: IInput) => {
   )
 }
 
-export default Input
+export default StartInput

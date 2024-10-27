@@ -1,25 +1,43 @@
 import { useNavigate } from 'react-router-dom'
-import Input from '../../components/input'
 import RectangleButton from '../../components/rectangle-button'
 import Logo from '../../components/logo'
 import * as S from './HomePage.style'
 import useProjectStore from '../../stores/project'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useInputDataStore from '../../stores/input-data'
 import useScenarioStore from '../../stores/scenario'
+import SplashImage from '../../assets/splash.webp'
+import { SubmitErrorHandler, useForm } from 'react-hook-form'
+import StartInput from '../../components/input/start-input'
+
+export interface StartFormValues {
+  projectName: string
+  projectDate: string
+}
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const { projectName, projectDate, resetProject } = useProjectStore()
+  const { setProjectName, setProjectDate, resetProject } = useProjectStore(
+    (state) => state,
+  )
   const { resetScenario } = useScenarioStore()
   const { resetInputData } = useInputDataStore()
+  const { register, handleSubmit, watch } = useForm<StartFormValues>({
+    mode: 'onSubmit',
+  })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const onSubmit = () => {
+    setProjectName(watch('projectName'))
+    setProjectDate(watch('projectDate'))
     navigate('/step/1')
   }
 
-  const [isActve, setIsActive] = useState(false)
+  const onError: SubmitErrorHandler<StartFormValues> = (errors) => {
+    ;(Object.keys(errors) as Array<keyof StartFormValues>).forEach((field) => {
+      const errorMessage = errors[field]?.message
+      if (errorMessage) alert(errorMessage)
+    })
+  }
 
   useEffect(() => {
     resetProject()
@@ -27,40 +45,36 @@ export default function HomePage() {
     resetInputData()
   }, [])
 
-  useEffect(() => {
-    if (projectName !== '' && projectDate !== '') {
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
-  }, [projectName, projectDate])
-
   return (
     <S.Wrapper>
-      <S.LeftSide>
+      <div>
         <Logo />
         <S.InfoWrapper>
           <h1>Welcome!</h1>
-          <div>
-            <h2>RAPro is a Risk Assessment</h2>
-            <h2>Program for contaminated sites.</h2>
-          </div>
-          <S.HelpButton onClick={() => navigate('/help')}>
-            <p>help</p>
-          </S.HelpButton>
+          <h2>
+            RAPro is a Risk Assessment Program for contaminated sites.Users can
+            input site information for the assessment of health risks caused by
+            various pathways at contaminated sites.
+          </h2>
+          <S.InputWrapper onSubmit={handleSubmit(onSubmit, onError)}>
+            <StartInput label="projectName" register={register} />
+            <StartInput label="projectDate" register={register} />
+            <S.ButtonWrapper>
+              <RectangleButton isActive={true} buttonType="submit">
+                Start
+              </RectangleButton>
+              <RectangleButton
+                isActive={false}
+                buttonType="button"
+                onClick={() => navigate('/help')}
+              >
+                Help
+              </RectangleButton>
+            </S.ButtonWrapper>
+          </S.InputWrapper>
         </S.InfoWrapper>
-      </S.LeftSide>
-      <S.RightSide>
-        <h1>Get Started</h1>
-        <span>아래 항목들을 입력해주세요.</span>
-        <S.ButtonWrapper onSubmit={handleSubmit}>
-          <Input inputType="projectName" />
-          <Input inputType="date" />
-          <RectangleButton isActive={isActve} buttonType="submit" size="large">
-            Start
-          </RectangleButton>
-        </S.ButtonWrapper>
-      </S.RightSide>
+      </div>
+      <S.SpalshImage src={SplashImage} alt="splash" />
     </S.Wrapper>
   )
 }

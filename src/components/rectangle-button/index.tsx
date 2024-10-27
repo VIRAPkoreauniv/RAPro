@@ -4,7 +4,7 @@ import * as S from './RectangleButton.style'
 interface IButton {
   children: ReactNode
   isActive: boolean
-  size: 'large' | 'medium'
+  size?: 'large' | 'medium'
   buttonType?: 'button' | 'submit'
   onClick?: () => void
 }
