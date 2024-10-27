@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 2rem;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 4.5rem;
@@ -30,41 +30,52 @@ export const SelectWrapper = styled.div`
   border: 1px solid var(--gray-middle);
   border-radius: 1rem;
   padding: 2rem;
-`
-export const ImgAndButton = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  align-items: flex-end;
-`
 
-export const Border = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  border: 1px solid var(--gray-middle);
-  border-radius: 1rem;
-  padding: 2rem;
-
-  img {
-    width: 90.9rem;
-    height: 35.4rem;
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
-`
-
-export const OptionWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 7fr;
-  align-items: center;
 
   select {
     width: 100%;
-    height: 3rem;
   }
 `
 
-export const ButtonWrapper = styled.div`
+export const InputWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+
+  span {
+    color: #111;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  select {
+    width: 100%;
+  }
+  fieldset {
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    gap: 50px;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      color: #767676;
+      font-family: Pretendard;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
 `
