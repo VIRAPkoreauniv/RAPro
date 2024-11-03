@@ -60,7 +60,10 @@ export default function HomePage() {
             <StartInput label="projectName" register={register} />
             <StartInput label="projectDate" register={register} />
             <S.ButtonWrapper>
-              <RectangleButton isActive={true} buttonType="submit">
+              <RectangleButton
+                isActive={!!watch('projectDate') && !!watch('projectName')}
+                buttonType="submit"
+              >
                 Start
               </RectangleButton>
               <RectangleButton
