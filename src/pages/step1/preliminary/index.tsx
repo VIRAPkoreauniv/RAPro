@@ -136,6 +136,11 @@ const PreliminaryStep1 = () => {
   useEffect(() => {
     if (source && pathway && receptor) {
       const scenario = getScenario({ source, pathway, receptor })
+      const AVAILABLE_SCENARIOS = [1, 2, 4, 15]
+      if (scenario && !AVAILABLE_SCENARIOS.includes(scenario)) {
+        alert('아직 이용할 수 없는 시나리오입니다. ')
+        return
+      }
       scenario && setScenario(scenario)
     }
   }, [receptor])
