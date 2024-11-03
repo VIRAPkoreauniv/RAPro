@@ -5,6 +5,7 @@ import { useComputeCRisk } from '../../hooks/useComputeCRisk'
 import { useComputeNCRisk } from '../../hooks/useComputeNCRisk'
 import usePreliminaryStore from '../../stores/preliminary'
 import useSiteDataStore from '../../stores/site-data'
+import { useEffect, useState } from 'react'
 
 const NavigationButtons = ({ isNextOn }: { isNextOn: boolean }) => {
   const navigate = useNavigate()
@@ -13,16 +14,25 @@ const NavigationButtons = ({ isNextOn }: { isNextOn: boolean }) => {
   const { source, pathway, receptor } = useSiteDataStore()
   const { mutate: mutateC, isSuccess: isSuccessC } = useComputeCRisk()
   const { mutate: mutateNC, isSuccess: isSuccessNC } = useComputeNCRisk()
+  const [isBothSuccess, setIsBothSuccess] = useState(false)
+
+  useEffect(() => {
+    if (isSuccessC && isSuccessNC) {
+      setIsBothSuccess(true)
+    }
+  }, [isSuccessC, isSuccessNC])
+
+  useEffect(() => {
+    if (isBothSuccess) {
+      navigate('/step/3')
+    }
+  }, [isBothSuccess])
 
   const computeRisk = () => {
     if (!scenario) return
 
     mutateNC({ scenario, source, pathway, receptor })
     mutateC({ scenario, source, pathway, receptor })
-
-    if (isSuccessC && isSuccessNC) {
-      navigate('/step/3')
-    }
   }
   if (currStep === 1) {
     return (
