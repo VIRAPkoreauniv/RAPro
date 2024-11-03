@@ -6,6 +6,7 @@ import {
 
 export interface IParams {
   name: string
+  desc?: string
   inputType: 'dropdown' | 'input' | 'computed'
   valueType: 'string' | 'number'
 }

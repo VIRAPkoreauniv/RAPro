@@ -1,5 +1,5 @@
 import Layout from '../../layouts'
-import PreliminaryStep1 from './components/preliminary'
+import PreliminaryStep1 from './preliminary'
 import * as S from './Step1Page.style'
 import useProjectStore from '../../stores/project'
 import { useEffect } from 'react'

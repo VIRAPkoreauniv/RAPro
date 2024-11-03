@@ -6,8 +6,6 @@ import useProjectStore from '../stores/project'
 
 const Layout = ({ children }: { children: ReactNode }) => {
   const { currStep } = useProjectStore()
-  console.log(currStep)
-
   const STEP: Record<number, JSX.Element> = {
     1: (
       <>

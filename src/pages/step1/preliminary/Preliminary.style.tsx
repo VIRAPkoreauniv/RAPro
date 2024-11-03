@@ -37,6 +37,15 @@ export const SelectWrapper = styled.div`
     gap: 10px;
   }
 
+  span {
+    color: #111;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
   select {
     width: 100%;
   }
@@ -78,4 +87,12 @@ export const InputWrapper = styled.div`
       line-height: normal;
     }
   }
+`
+export const InfoText = styled.span`
+  color: #767676;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `

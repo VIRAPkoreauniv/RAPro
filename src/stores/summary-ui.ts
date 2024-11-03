@@ -3,10 +3,14 @@ import { devtools, persist } from 'zustand/middleware'
 
 export interface ISummaryUIState {
   isInformationOn: boolean
-  isDataOn: boolean
+  isSourceOn: boolean
+  isPathwayOn: boolean
+  isReceptorOn: boolean
   isResultOn: boolean
   setIsInformationOn: (isInformationOn: boolean) => void
-  setIsDataOn: (isDataOn: boolean) => void
+  setIsSourceOn: (isSourceOn: boolean) => void
+  setIsPathwayOn: (isPathwayOn: boolean) => void
+  setIsReceptorOn: (isReceptorOn: boolean) => void
   setIsResultOn: (isResultOn: boolean) => void
   resetSummaryUI: () => void
 }
@@ -15,18 +19,26 @@ const useSummaryUIStore = create<ISummaryUIState>()(
   persist(
     devtools((set) => ({
       isInformationOn: true,
-      isDataOn: true,
+      isSourceOn: true,
+      isPathwayOn: true,
+      isReceptorOn: true,
       isResultOn: true,
       setIsInformationOn: (isInformationOn: boolean) =>
         set((state: ISummaryUIState) => ({ ...state, isInformationOn })),
-      setIsDataOn: (isDataOn: boolean) =>
-        set((state: ISummaryUIState) => ({ ...state, isDataOn })),
+      setIsSourceOn: (isSourceOn: boolean) =>
+        set((state: ISummaryUIState) => ({ ...state, isSourceOn })),
+      setIsPathwayOn: (isPathwayOn: boolean) =>
+        set((state: ISummaryUIState) => ({ ...state, isPathwayOn })),
+      setIsReceptorOn: (isReceptorOn: boolean) =>
+        set((state: ISummaryUIState) => ({ ...state, isReceptorOn })),
       setIsResultOn: (isResultOn: boolean) =>
         set((state: ISummaryUIState) => ({ ...state, isResultOn })),
       resetSummaryUI: () =>
         set(() => ({
           isInformationOn: true,
-          isDataOn: true,
+          isSourceOn: true,
+          isPathwayOn: true,
+          isReceptorOn: true,
           isResultOn: true,
         })),
     })),

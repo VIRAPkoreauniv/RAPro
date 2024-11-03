@@ -1,29 +1,29 @@
-import ToggleBox from '../../components/toggle-box'
-import { SCENARIO_IMAGE_LIST } from '../../data/scenario'
 import Layout from '../../layouts'
 import useProjectStore from '../../stores/project'
-import useScenarioStore from '../../stores/scenario'
 import * as S from './Step3Page.style'
-import Table from '../../components/table'
-import useSummaryUIStore from '../../stores/summary-ui'
-import RectangleButton from '../../components/rectangle-button'
-import { useNavigate } from 'react-router-dom'
-import useResultStore from '../../stores/result'
+import { useEffect } from 'react'
+import PreliminaryStep3 from './preliminary'
+import { StageType } from '../step1'
+import NavigationButtons from '../../components/navigation-buttons'
 
 export default function Step3Page() {
-  const navigate = useNavigate()
+  const { stage, setCurrStep } = useProjectStore()
 
-  const { projectName, projectDate } = useProjectStore()
-  const { scenario } = useScenarioStore()
-  const { isInformationOn, isDataOn, isResultOn } = useSummaryUIStore()
-  const { C_Risk, NC_Risk } = useResultStore()
+  const STAGE: Record<StageType, JSX.Element> = {
+    Preliminary: <PreliminaryStep3 />,
+    Characterizations: <>준비 중</>,
+    'Remediation/mitigation': <>준비 중</>,
+  }
+
+  useEffect(() => {
+    setCurrStep(3)
+  }, [])
 
   return (
     <Layout>
       <S.Wrapper>
-        <S.Title>STEP 3 : Summary</S.Title>
-        <S.Info>Summary of the risk assessment is provided. </S.Info>
-        <ToggleBox title="Site Information" isOpen={isInformationOn}>
+        {STAGE[stage]}
+        {/* <ToggleBox title="Site Information" isOpen={isInformationOn}>
           <S.InfoWrapper>
             <S.LeftWrapper>
               <S.InputWrapper>
@@ -69,8 +69,8 @@ export default function Step3Page() {
             <S.SectionTitle>NC Risk</S.SectionTitle>
             <input readOnly value={NC_Risk || 'No Data'} />
           </S.InputWrapper>
-        </ToggleBox>
-        <S.ButtonWrapper>
+        </ToggleBox> */}
+        {/* <S.ButtonWrapper>
           <RectangleButton
             isActive={true}
             size="medium"
@@ -83,7 +83,8 @@ export default function Step3Page() {
           >
             Finish
           </RectangleButton>
-        </S.ButtonWrapper>
+        </S.ButtonWrapper> */}
+        <NavigationButtons isNextOn={true} />
       </S.Wrapper>
     </Layout>
   )

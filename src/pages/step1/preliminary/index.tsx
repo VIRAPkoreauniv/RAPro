@@ -1,27 +1,26 @@
 import * as S from './Preliminary.style'
 import { useQuery } from '@tanstack/react-query'
-import { getChemicalList } from '../../../../apis/computeAPI'
+import { getChemicalList } from '../../../apis/computeAPI'
 import { useEffect } from 'react'
-import NavigationButtons from '../../../../components/navigation-buttons'
+import NavigationButtons from '../../../components/navigation-buttons'
 import {
   PATHWAY_LIST,
   RECEPTOR_LIST,
   SCENARIO_IMAGE_LIST,
   SCENARIO_NUMBER_LIST,
   SOURCE_LIST,
-} from '../../../../data/scenario'
+} from '../../../data/scenario'
 import {
   PathwayType,
   ReceptorType,
   SourceType,
-} from '../../../../types/scenario.type'
-import getScenario from '../../../../utils/getScenario'
-import usePreliminaryStore from '../../../../stores/preliminary'
+} from '../../../types/scenario.type'
+import getScenario from '../../../utils/getScenario'
+import usePreliminaryStore from '../../../stores/preliminary'
+import useSiteDataStore from '../../../stores/site-data'
 
 const PreliminaryStep1 = () => {
   const {
-    coc,
-    setCoc,
     scenario,
     setScenario,
     isScenarioKnown,
@@ -33,6 +32,9 @@ const PreliminaryStep1 = () => {
     receptor,
     setReceptor,
   } = usePreliminaryStore((state) => state)
+  const { source: siteSource, updateSource } = useSiteDataStore(
+    (state) => state,
+  )
 
   const { data: CHEMICAL_LIST } = useQuery({
     queryKey: ['chemical'],
@@ -86,7 +88,7 @@ const PreliminaryStep1 = () => {
     return (
       <S.SelectWrapper>
         <div>
-          <p>Source</p>
+          <span>Source</span>
           <select defaultValue="---" onChange={(e) => handleChangeSource(e)}>
             <option>---</option>
             {SOURCE_LIST.map((elem, idx) => {
@@ -99,7 +101,7 @@ const PreliminaryStep1 = () => {
           </select>
         </div>
         <div>
-          <p>Pathway</p>
+          <span>Pathway</span>
           <select
             defaultValue="---"
             disabled={source !== null ? false : true}
@@ -113,7 +115,7 @@ const PreliminaryStep1 = () => {
           </select>
         </div>
         <div>
-          <p>Receptor</p>
+          <span>Receptor</span>
           <select
             defaultValue="---"
             disabled={pathway !== null ? false : true}
@@ -144,8 +146,8 @@ const PreliminaryStep1 = () => {
         <span>Chemical of Concern</span>
         <select
           defaultValue="---"
-          value={coc}
-          onChange={(e) => setCoc(e.target.value)}
+          value={siteSource.chemicalOfConcern}
+          onChange={(e) => updateSource({ chemicalOfConcern: e.target.value })}
         >
           <option value="">---</option>
           {CHEMICAL_LIST?.data.map((elem: string) => {
@@ -185,13 +187,13 @@ const PreliminaryStep1 = () => {
           : null}
       {scenario && (
         <>
-          <p>
+          <S.InfoText>
             ※ A diagram for the selected site scenario is visualized as follows.
-          </p>
+          </S.InfoText>
           <img src={SCENARIO_IMAGE_LIST[scenario]} />
         </>
       )}
-      <NavigationButtons nextLink="/step/2" isNextOn={!!scenario} />
+      <NavigationButtons isNextOn={!!scenario} />
     </S.Wrapper>
   )
 }

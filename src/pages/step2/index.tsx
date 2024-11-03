@@ -3,12 +3,13 @@ import Layout from '../../layouts'
 import useProjectStore from '../../stores/project'
 import { StageType } from '../step1'
 import * as S from './Step2Page.style'
+import PreliminaryStep2 from './preliminary'
 
 export default function Step2Page() {
   const { stage, setCurrStep } = useProjectStore()
 
   const STAGE: Record<StageType, JSX.Element> = {
-    Preliminary: <></>,
+    Preliminary: <PreliminaryStep2 />,
     Characterizations: <>준비 중</>,
     'Remediation/mitigation': <>준비 중</>,
   }
@@ -49,72 +50,6 @@ export default function Step2Page() {
   //   queryFn: getExposureList,
   //   staleTime: Infinity,
   // })
-
-  // const renderSourceInputElement = (
-  //   { inputType, valueType }: IParams,
-  //   elem: SourceInputType,
-  // ) => {
-  //   switch (inputType) {
-  //     case 'dropdown':
-  //       return (
-  //         <select
-  //           defaultValue="---"
-  //           value={source[elem]}
-  //           onChange={(e) => updateSource({ [elem]: e.target.value })}
-  //         >
-  //           <option value="">---</option>
-  //           {CHEMICAL_LIST?.data.map((elem: string) => {
-  //             return <option>{elem}</option>
-  //           })}
-  //         </select>
-  //       )
-  //     case 'input':
-  //       return (
-  //         <input
-  //           type={valueType}
-  //           value={source[elem]}
-  //           onChange={(e) => updateSource({ [elem]: Number(e.target.value) })}
-  //         />
-  //       )
-  //     case 'computed':
-  //       return
-  //     default:
-  //       break
-  //   }
-  // }
-
-  // const renderPathwayInputElement = (
-  //   { inputType, valueType }: IParams,
-  //   elem: PathwayInputType,
-  // ) => {
-  //   switch (inputType) {
-  //     case 'dropdown':
-  //       return (
-  //         <select
-  //           defaultValue="---"
-  //           value={pathway[elem]}
-  //           onChange={(e) => updatePathway({ [elem]: e.target.value })}
-  //         >
-  //           <option value="">---</option>
-  //           {SOIL_LIST?.data.map((elem: string) => {
-  //             return <option>{elem}</option>
-  //           })}
-  //         </select>
-  //       )
-  //     case 'input':
-  //       return (
-  //         <input
-  //           type={valueType}
-  //           value={pathway[elem]}
-  //           onChange={(e) => updatePathway({ [elem]: Number(e.target.value) })}
-  //         />
-  //       )
-  //     case 'computed':
-  //       return
-  //     default:
-  //       break
-  //   }
-  // }
 
   // const renderReceptorInputElement = (
   //   { inputType, valueType }: IParams,

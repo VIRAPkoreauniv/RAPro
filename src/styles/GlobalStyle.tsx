@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
         --secondary: #98AEFF;
         --black: #333333;
         --white: #FFFFFF;
-        --background: #F5F5F5;
+        --background: white;
         --gray-middle:#787878;
         --gray-light: #DFDFDF;
         --gray-bright: #EDEDED;

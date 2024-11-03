@@ -4,11 +4,13 @@ import Logo from '../../components/logo'
 import * as S from './HomePage.style'
 import useProjectStore from '../../stores/project'
 import { useEffect } from 'react'
-import useInputDataStore from '../../stores/input-data'
+import useInputDataStore from '../../stores/site-data'
 import useScenarioStore from '../../stores/scenario'
 import SplashImage from '../../assets/splash.webp'
 import { SubmitErrorHandler, useForm } from 'react-hook-form'
 import StartInput from '../../components/input/start-input'
+import usePreliminaryStore from '../../stores/preliminary'
+import useSiteDataStore from '../../stores/site-data'
 
 export interface StartFormValues {
   projectName: string
@@ -20,8 +22,8 @@ export default function HomePage() {
   const { setProjectName, setProjectDate, resetProject } = useProjectStore(
     (state) => state,
   )
-  const { resetScenario } = useScenarioStore()
-  const { resetInputData } = useInputDataStore()
+  const { resetPreliminary } = usePreliminaryStore((state) => state)
+  const { resetInputData } = useSiteDataStore()
   const { register, handleSubmit, watch } = useForm<StartFormValues>({
     mode: 'onSubmit',
   })
@@ -41,7 +43,7 @@ export default function HomePage() {
 
   useEffect(() => {
     resetProject()
-    resetScenario()
+    resetPreliminary()
     resetInputData()
   }, [])
 
