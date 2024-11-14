@@ -5,11 +5,13 @@ export const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 44px 60px;
 `
 export const InfoWrapper = styled.div`
   padding-left: 30px;
   padding-top: 115px;
+  width: 40vw;
 
   h1 {
     color: #fff;
@@ -50,4 +52,5 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   padding-bottom: 10rem;
   gap: 3rem;
+  width: 100%;
 `
