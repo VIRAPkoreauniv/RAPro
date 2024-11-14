@@ -34,6 +34,7 @@ const useProjectStore = create<IProjectState>()(
           projectName: '',
           projectDate: '',
           currStep: 0,
+          stage: 'Preliminary',
         })),
     })),
     {

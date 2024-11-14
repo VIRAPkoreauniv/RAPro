@@ -7,15 +7,15 @@ export interface IPreliminaryState {
   scenario: number | undefined | null
   setScenario: (scenario: number | null) => void
 
-  // UI
+  // STEP1
   isScenarioKnown: boolean | undefined
+  sourceType: SourceType | undefined | null
+  pathwayType: PathwayType | undefined | null
+  receptorType: ReceptorType | undefined | null
   setIsScenarioKnown: (isScenarioKnonw: boolean) => void
-  source: SourceType | undefined | null
-  setSource: (source: SourceType | null) => void
-  pathway: PathwayType | undefined | null
-  setPathway: (source: PathwayType | null) => void
-  receptor: ReceptorType | undefined | null
-  setReceptor: (source: ReceptorType | null) => void
+  setSourceType: (source: SourceType | null) => void
+  setPathwayType: (source: PathwayType | null) => void
+  setReceptorType: (source: ReceptorType | null) => void
 
   // RESET
   resetPreliminary: () => void
@@ -32,24 +32,24 @@ const usePreliminaryStore = create<IPreliminaryState>()(
       isScenarioKnown: undefined,
       setIsScenarioKnown: (isScenarioKnown: boolean) =>
         set((state: IPreliminaryState) => ({ ...state, isScenarioKnown })),
-      source: undefined,
-      setSource: (source: SourceType | null) =>
-        set((state: IPreliminaryState) => ({ ...state, source })),
-      pathway: undefined,
-      setPathway: (pathway: PathwayType | null) =>
-        set((state: IPreliminaryState) => ({ ...state, pathway })),
-      receptor: undefined,
-      setReceptor: (receptor: ReceptorType | null) =>
-        set((state: IPreliminaryState) => ({ ...state, receptor })),
+      sourceType: undefined,
+      setSourceType: (sourceType: SourceType | null) =>
+        set((state: IPreliminaryState) => ({ ...state, sourceType })),
+      pathwayType: undefined,
+      setPathwayType: (pathwayType: PathwayType | null) =>
+        set((state: IPreliminaryState) => ({ ...state, pathwayType })),
+      receptorType: undefined,
+      setReceptorType: (receptorType: ReceptorType | null) =>
+        set((state: IPreliminaryState) => ({ ...state, receptorType })),
       // RESET
       resetPreliminary: () =>
         set(() => ({
           chemicalOfConcern: undefined,
           scenario: undefined,
           isScenarioKnown: undefined,
-          source: undefined,
-          pathway: undefined,
-          receptor: undefined,
+          sourceType: undefined,
+          pathwayType: undefined,
+          receptorType: undefined,
         })),
     })),
     { name: 'preliminaryStore' },

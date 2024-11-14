@@ -3,6 +3,7 @@ import PreliminaryStep1 from './preliminary'
 import * as S from './Step1Page.style'
 import useProjectStore from '../../stores/project'
 import { useEffect } from 'react'
+import CharacterizationStep1 from './characterization'
 
 export type StageType =
   | 'Preliminary'
@@ -20,7 +21,7 @@ export default function Step1Page() {
 
   const STAGE: Record<StageType, JSX.Element> = {
     Preliminary: <PreliminaryStep1 />,
-    Characterizations: <>준비 중</>,
+    Characterizations: <CharacterizationStep1 />,
     'Remediation/mitigation': <>준비 중</>,
   }
 
@@ -30,7 +31,7 @@ export default function Step1Page() {
 
   return (
     <Layout>
-      <S.Wrapper>
+      <S.Container>
         <S.MenuWrapper>
           {STAGE_LIST.map((elem) => (
             <S.Menu
@@ -43,7 +44,7 @@ export default function Step1Page() {
           ))}
         </S.MenuWrapper>
         {STAGE[stage]}
-      </S.Wrapper>
+      </S.Container>
     </Layout>
   )
 }

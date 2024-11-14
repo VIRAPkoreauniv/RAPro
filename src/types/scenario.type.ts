@@ -12,7 +12,7 @@ export type ReceptorType =
   | 'Surface water swimming, fish consumption'
 
 export interface IScenario {
-  source: SourceType
-  pathway: PathwayType
-  receptor: ReceptorType
+  sourceType: SourceType
+  pathwayType: PathwayType
+  receptorType: ReceptorType
 }

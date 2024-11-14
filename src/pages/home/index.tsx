@@ -9,6 +9,8 @@ import { SubmitErrorHandler, useForm } from 'react-hook-form'
 import StartInput from '../../components/input/start-input'
 import usePreliminaryStore from '../../stores/preliminary'
 import useSiteDataStore from '../../stores/site-data'
+import useCharacterizationStore from '../../stores/characterization'
+import { useResetStores } from '../../hooks/useResetStores'
 
 export interface StartFormValues {
   projectName: string
@@ -17,11 +19,9 @@ export interface StartFormValues {
 
 export default function HomePage() {
   const navigate = useNavigate()
-  const { setProjectName, setProjectDate, resetProject } = useProjectStore(
-    (state) => state,
-  )
-  const { resetPreliminary } = usePreliminaryStore((state) => state)
-  const { resetInputData } = useSiteDataStore()
+  const resetAllStores = useResetStores()
+  const { setProjectName, setProjectDate } = useProjectStore((state) => state)
+
   const { register, handleSubmit, watch } = useForm<StartFormValues>({
     mode: 'onSubmit',
   })
@@ -40,9 +40,7 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    resetProject()
-    resetPreliminary()
-    resetInputData()
+    resetAllStores()
   }, [])
 
   return (
