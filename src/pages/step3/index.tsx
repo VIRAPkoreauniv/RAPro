@@ -6,6 +6,7 @@ import PreliminaryStep3 from './preliminary'
 import { StageType } from '../step1'
 import NavigationButtons from '../../components/navigation-buttons'
 import CharacterizationStep3 from './characterization'
+import RemediationStep3 from './remediation'
 
 export default function Step3Page() {
   const { stage, setCurrStep } = useProjectStore()
@@ -13,7 +14,7 @@ export default function Step3Page() {
   const STAGE: Record<StageType, JSX.Element> = {
     Preliminary: <PreliminaryStep3 />,
     Characterizations: <CharacterizationStep3 />,
-    'Remediation/mitigation': <>준비 중</>,
+    'Remediation/mitigation': <RemediationStep3 />,
   }
 
   useEffect(() => {

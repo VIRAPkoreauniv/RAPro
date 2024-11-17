@@ -5,6 +5,7 @@ import { StageType } from '../step1'
 import * as S from './Step2Page.style'
 import PreliminaryStep2 from './preliminary'
 import CharacterizationStep2 from './characterization'
+import RemediationStep2 from './remediation'
 
 export default function Step2Page() {
   const { stage, setCurrStep } = useProjectStore()
@@ -12,7 +13,7 @@ export default function Step2Page() {
   const STAGE: Record<StageType, JSX.Element> = {
     Preliminary: <PreliminaryStep2 />,
     Characterizations: <CharacterizationStep2 />,
-    'Remediation/mitigation': <>준비 중</>,
+    'Remediation/mitigation': <RemediationStep2 />,
   }
 
   useEffect(() => {

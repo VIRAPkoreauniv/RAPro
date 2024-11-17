@@ -4,6 +4,7 @@ import * as S from './Step1Page.style'
 import useProjectStore from '../../stores/project'
 import { useEffect } from 'react'
 import CharacterizationStep1 from './characterization'
+import RemediationStep1 from './remediation'
 
 export type StageType =
   | 'Preliminary'
@@ -22,7 +23,7 @@ export default function Step1Page() {
   const STAGE: Record<StageType, JSX.Element> = {
     Preliminary: <PreliminaryStep1 />,
     Characterizations: <CharacterizationStep1 />,
-    'Remediation/mitigation': <>준비 중</>,
+    'Remediation/mitigation': <RemediationStep1 />,
   }
 
   useEffect(() => {
