@@ -13,7 +13,7 @@ export interface IInputDataState {
 }
 
 //TODO: 1,2,4,15 외의 시나리오 작업 시 파라미터 추가 필요
-const useInputDataStore = create<IInputDataState>()(
+const useSiteDataStore = create<IInputDataState>()(
   persist(
     devtools((set) => ({
       source: {
@@ -119,4 +119,4 @@ const useInputDataStore = create<IInputDataState>()(
   ),
 )
 
-export default useInputDataStore
+export default useSiteDataStore

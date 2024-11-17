@@ -1,4 +1,4 @@
-import useInputDataStore from '../../stores/input-data'
+import useInputDataStore from '../../stores/site-data'
 import { TABLE_PARAMS, TableType } from './params'
 import * as S from './Table.style'
 import { IPathway, IReceptor, ISource } from '../../types/input.type'
