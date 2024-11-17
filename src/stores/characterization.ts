@@ -26,6 +26,7 @@ export interface ICharacterizationState {
   setNumberOfScenario: (number: number) => void
   setScenarioList: (scenarioList: IScenarioData[]) => void
   updateScenarioList: (index: number, data: IScenarioData) => void
+
   // UI
   isModalOn: boolean
   setIsModalOn: (isModalOn: boolean) => void

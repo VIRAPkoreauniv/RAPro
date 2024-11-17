@@ -1,80 +1,69 @@
+import { useEffect, useState } from 'react'
 import ToggleBox from '../../../components/toggle-box'
 import { SCENARIO_IMAGE_LIST } from '../../../data/scenario'
 import { SCENARIO_PARAMS } from '../../../data/scenario-params'
 import usePreliminaryStore from '../../../stores/preliminary'
-import useResultStore from '../../../stores/result'
 import useSiteDataStore from '../../../stores/site-data'
 import useSummaryUIStore from '../../../stores/summary-ui'
 import * as S from '../Step3Page.style'
+import { useComputeCRisk } from '../../../hooks/useComputeCRisk'
+import { useComputeNCRisk } from '../../../hooks/useComputeNCRisk'
+import { IRiskRequest } from '../../../types/api.type'
+import STEP3 from '../components'
 
 const PreliminaryStep3 = () => {
   const { scenario } = usePreliminaryStore()
-  const { isSourceOn, isPathwayOn, isReceptorOn, isResultOn } =
-    useSummaryUIStore()
+  const { isResultOn } = useSummaryUIStore()
   const { source, pathway, receptor } = useSiteDataStore()
-  const { C_Risk, NC_Risk } = useResultStore()
+  const computeCRisk = useComputeCRisk()
+  const computeNCRisk = useComputeNCRisk()
+  const [cRisk, setcRisk] = useState<number | null | undefined>(undefined)
+  const [ncRisk, setncRisk] = useState<number | null | undefined>(undefined)
+
+  const handleComputeRisk = async (data: IRiskRequest) => {
+    try {
+      await computeCRisk.mutateAsync(data).then((res) => {
+        setcRisk(res.data.C_Risk)
+      })
+      await computeNCRisk.mutateAsync(data).then((res) => {
+        setncRisk(res.data.NC_Risk)
+      })
+    } catch (error) {
+      console.error('Error in computing risk:', error)
+    }
+  }
+
+  const computeRisk = () => {
+    if (!scenario) return
+
+    handleComputeRisk({ scenario, source, pathway, receptor })
+  }
+
+  useEffect(() => computeRisk(), [])
 
   if (!scenario) return
+  if (cRisk === undefined || ncRisk === undefined) {
+    return <h1>loading...</h1>
+  }
 
   return (
     <>
-      <S.ScenarioImg
-        src={SCENARIO_IMAGE_LIST[scenario || 1]}
-        alt={`Scenario ${scenario}`}
+      <STEP3.ScenarioImage scenario={scenario} />
+      <STEP3.Table
+        scenario={scenario}
+        source={source}
+        pathway={pathway}
+        receptor={receptor}
       />
-      <S.LabelWrapper>
-        <span className="label-text">Cancer risk</span>
-        <span className="label-text">Value</span>
-        <span className="label-text">Type</span>
-      </S.LabelWrapper>
-      <ToggleBox title="Source" isOpen={isSourceOn}>
-        <S.SectionWrapper>
-          {SCENARIO_PARAMS[scenario].source.map((elem) => {
-            return (
-              <S.RowWrapper key={elem}>
-                <span className="risk-text">{elem}</span>
-                <span className="value-text">{source[elem]}</span>
-                <span className="value-text">User Input</span>
-              </S.RowWrapper>
-            )
-          })}
-        </S.SectionWrapper>
-      </ToggleBox>
-      <ToggleBox title="Pathway" isOpen={isPathwayOn}>
-        <S.SectionWrapper>
-          {SCENARIO_PARAMS[scenario].pathway.map((elem) => {
-            return (
-              <S.RowWrapper key={elem}>
-                <span className="risk-text">{elem}</span>
-                <span className="value-text">{pathway[elem]}</span>
-                <span className="value-text">User Input</span>
-              </S.RowWrapper>
-            )
-          })}
-        </S.SectionWrapper>
-      </ToggleBox>
-      <ToggleBox title="Receptor" isOpen={isReceptorOn}>
-        <S.SectionWrapper>
-          {SCENARIO_PARAMS[scenario].receptor.map((elem) => {
-            return (
-              <S.RowWrapper key={elem}>
-                <span className="risk-text">{elem}</span>
-                <span className="value-text">{receptor[elem]}</span>
-                <span className="value-text">User Input</span>
-              </S.RowWrapper>
-            )
-          })}
-        </S.SectionWrapper>
-      </ToggleBox>
       <ToggleBox title="Results" isOpen={isResultOn}>
         <S.SectionWrapper>
           <S.RowWrapper>
             <span className="risk-text">Cancer risk</span>
-            <span className="value-text">{C_Risk || '--'}</span>
+            <span className="value-text">{cRisk || '--'}</span>
           </S.RowWrapper>
           <S.RowWrapper>
             <span className="risk-text">Non-Cancer risk</span>
-            <span className="value-text">{NC_Risk || '--'}</span>
+            <span className="value-text">{ncRisk || '--'}</span>
           </S.RowWrapper>
         </S.SectionWrapper>
       </ToggleBox>

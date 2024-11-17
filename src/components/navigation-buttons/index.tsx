@@ -1,39 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import useProjectStore from '../../stores/project'
-import { useComputeCRisk } from '../../hooks/useComputeCRisk'
-import { useComputeNCRisk } from '../../hooks/useComputeNCRisk'
-import usePreliminaryStore from '../../stores/preliminary'
-import useSiteDataStore from '../../stores/site-data'
-import { useEffect, useState } from 'react'
 
-const NavigationButtons = ({ isNextOn }: { isNextOn: boolean }) => {
+interface NavigationButtonsProps {
+  isNextOn: boolean
+  onClick?: () => void
+}
+
+const NavigationButtons = ({ isNextOn, onClick }: NavigationButtonsProps) => {
   const navigate = useNavigate()
   const { currStep } = useProjectStore()
-  const { scenario } = usePreliminaryStore()
-  const { source, pathway, receptor } = useSiteDataStore()
-  const { mutate: mutateC, isSuccess: isSuccessC } = useComputeCRisk()
-  const { mutate: mutateNC, isSuccess: isSuccessNC } = useComputeNCRisk()
-  const [isBothSuccess, setIsBothSuccess] = useState(false)
 
-  useEffect(() => {
-    if (isSuccessC && isSuccessNC) {
-      setIsBothSuccess(true)
-    }
-  }, [isSuccessC, isSuccessNC])
-
-  useEffect(() => {
-    if (isBothSuccess) {
-      navigate('/step/3')
-    }
-  }, [isBothSuccess])
-
-  const computeRisk = () => {
-    if (!scenario) return
-
-    mutateNC({ scenario, source, pathway, receptor })
-    mutateC({ scenario, source, pathway, receptor })
-  }
   if (currStep === 1) {
     return (
       <Wrapper>
@@ -56,7 +33,7 @@ const NavigationButtons = ({ isNextOn }: { isNextOn: boolean }) => {
         <Link to="/step/1">
           <Backbutton>{'<'} Back</Backbutton>
         </Link>
-        <NextButton onClick={computeRisk} isNextOn={isNextOn}>
+        <NextButton isNextOn={isNextOn} onClick={onClick}>
           Next {'>'}
         </NextButton>
       </Wrapper>
