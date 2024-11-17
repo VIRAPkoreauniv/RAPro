@@ -7,9 +7,6 @@ import { useEffect } from 'react'
 import SplashImage from '../../assets/splash.webp'
 import { SubmitErrorHandler, useForm } from 'react-hook-form'
 import StartInput from '../../components/input/start-input'
-import usePreliminaryStore from '../../stores/preliminary'
-import useSiteDataStore from '../../stores/site-data'
-import useCharacterizationStore from '../../stores/characterization'
 import { useResetStores } from '../../hooks/useResetStores'
 
 export interface StartFormValues {

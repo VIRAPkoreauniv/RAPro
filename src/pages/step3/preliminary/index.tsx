@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import ToggleBox from '../../../components/toggle-box'
-import { SCENARIO_IMAGE_LIST } from '../../../data/scenario'
-import { SCENARIO_PARAMS } from '../../../data/scenario-params'
 import usePreliminaryStore from '../../../stores/preliminary'
 import useSiteDataStore from '../../../stores/site-data'
 import useSummaryUIStore from '../../../stores/summary-ui'

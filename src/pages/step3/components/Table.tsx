@@ -12,8 +12,7 @@ interface TableProps {
 }
 
 const Table = ({ scenario, source, pathway, receptor }: TableProps) => {
-  const { isSourceOn, isPathwayOn, isReceptorOn, isResultOn } =
-    useSummaryUIStore()
+  const { isSourceOn, isPathwayOn, isReceptorOn } = useSummaryUIStore()
 
   return (
     <>

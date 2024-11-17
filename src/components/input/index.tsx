@@ -1,7 +1,6 @@
 import * as S from './Input.style'
 import FolderIcon from '../../assets/icon/folder.svg'
 import DateIcon from '../../assets/icon/calendar.svg'
-import useProjectStore from '../../stores/project'
 import { UseFormRegister } from 'react-hook-form'
 import { StartFormValues } from '../../pages/home'
 
@@ -26,18 +25,6 @@ const INPUT_LIST = {
 }
 
 const Input = ({ label, register }: IInput) => {
-  const { setProjectName, setProjectDate } = useProjectStore((state) => state)
-
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-
-    if (label === 'projectName') {
-      setProjectName(value)
-    } else if (label === 'projectDate') {
-      setProjectDate(value)
-    }
-  }
-
   return (
     <S.Wrapper>
       <img src={INPUT_LIST[label].icon} alt="" />
