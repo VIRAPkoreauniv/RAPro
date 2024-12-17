@@ -1,6 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import useProjectStore from '../../stores/project'
+import HOME_ICON from '../../assets/icon/home.svg'
+import ARROW_RIGHT_ICON from '../../assets/icon/arrow-right.svg'
+import ARROW_LEFT_ICON from '../../assets/icon/arrow-left.svg'
 
 interface NavigationButtonsProps {
   isNextOn: boolean
@@ -15,7 +18,10 @@ const NavigationButtons = ({ isNextOn, onClick }: NavigationButtonsProps) => {
     return (
       <Wrapper>
         <Link to="/">
-          <HomeButton>Home</HomeButton>
+          <HomeButton>
+            <img src={HOME_ICON} alt="home" />
+            Home
+          </HomeButton>
         </Link>
         <NextButton
           onClick={() => {
@@ -23,7 +29,7 @@ const NavigationButtons = ({ isNextOn, onClick }: NavigationButtonsProps) => {
           }}
           isNextOn={isNextOn}
         >
-          Next {'>'}
+          Next <img src={ARROW_RIGHT_ICON} alt="next" />
         </NextButton>
       </Wrapper>
     )
@@ -31,10 +37,14 @@ const NavigationButtons = ({ isNextOn, onClick }: NavigationButtonsProps) => {
     return (
       <Wrapper>
         <Link to="/step/1">
-          <Backbutton>{'<'} Back</Backbutton>
+          <Backbutton>
+            <img src={ARROW_LEFT_ICON} alt="back" />
+            Back
+          </Backbutton>
         </Link>
         <NextButton isNextOn={isNextOn} onClick={onClick}>
-          Next {'>'}
+          Next
+          <img src={ARROW_RIGHT_ICON} alt="next" />
         </NextButton>
       </Wrapper>
     )
@@ -42,10 +52,15 @@ const NavigationButtons = ({ isNextOn, onClick }: NavigationButtonsProps) => {
     return (
       <Wrapper>
         <Link to="/step/2">
-          <Backbutton>{'<'} Back</Backbutton>
+          <Backbutton>
+            <img src={ARROW_LEFT_ICON} alt="back" />
+            Back
+          </Backbutton>
         </Link>
         <Link to="/">
-          <NextButton isNextOn={true}>Finish {'>'}</NextButton>
+          <NextButton isNextOn={true}>
+            Finish <img src={ARROW_RIGHT_ICON} alt="finish" />
+          </NextButton>
         </Link>
       </Wrapper>
     )

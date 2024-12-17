@@ -8,6 +8,7 @@ import { useComputeCRisk } from '../../../hooks/useComputeCRisk'
 import { useComputeNCRisk } from '../../../hooks/useComputeNCRisk'
 import { IRiskRequest } from '../../../types/api.type'
 import STEP3 from '../components'
+import * as M from '../../step1/Step1Page.style'
 
 const PreliminaryStep3 = () => {
   const { scenario } = usePreliminaryStore()
@@ -45,27 +46,29 @@ const PreliminaryStep3 = () => {
   }
 
   return (
-    <>
-      <STEP3.ScenarioImage scenario={scenario} />
-      <STEP3.Table
-        scenario={scenario}
-        source={source}
-        pathway={pathway}
-        receptor={receptor}
-      />
-      <ToggleBox title="Results" isOpen={isResultOn}>
-        <S.SectionWrapper>
-          <S.RowWrapper>
-            <span className="risk-text">Cancer risk</span>
-            <span className="value-text">{cRisk || '--'}</span>
-          </S.RowWrapper>
-          <S.RowWrapper>
-            <span className="risk-text">Non-Cancer risk</span>
-            <span className="value-text">{ncRisk || '--'}</span>
-          </S.RowWrapper>
-        </S.SectionWrapper>
-      </ToggleBox>
-    </>
+    <M.Wrapper>
+      <M.Content>
+        <STEP3.ScenarioImage scenario={scenario} />
+        <STEP3.Table
+          scenario={scenario}
+          source={source}
+          pathway={pathway}
+          receptor={receptor}
+        />
+        <ToggleBox title="Results" isOpen={isResultOn}>
+          <S.SectionWrapper>
+            <S.RowWrapper>
+              <span className="risk-text">Cancer risk</span>
+              <span className="value-text">{cRisk || '--'}</span>
+            </S.RowWrapper>
+            <S.RowWrapper>
+              <span className="risk-text">Non-Cancer risk</span>
+              <span className="value-text">{ncRisk || '--'}</span>
+            </S.RowWrapper>
+          </S.SectionWrapper>
+        </ToggleBox>
+      </M.Content>
+    </M.Wrapper>
   )
 }
 

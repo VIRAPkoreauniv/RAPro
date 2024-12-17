@@ -3,10 +3,10 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--gray-middle);
   height: 100vh;
-  padding: 2rem;
+  padding: 5rem;
   gap: 5rem;
+  background-color: #f6f8fc;
 `
 
 export const TextWrapper = styled.div`

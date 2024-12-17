@@ -11,6 +11,7 @@ import {
 } from '../../../types/scenario.type'
 import getScenario from '../../../utils/getScenario'
 import { useEffect } from 'react'
+import Select from '../../../components/select'
 
 interface NoScenarioProps {
   setScenario: (scenario: number) => void
@@ -63,50 +64,49 @@ const NoScenario = ({
       scenario && setScenario(scenario)
     }
   }, [receptorType])
-
+  // <select
+  //   defaultValue="---"
+  //   disabled={sourceType !== null ? false : true}
+  //   onChange={(e) => handleChangePathway(e)}
+  // >
+  //   <option>---</option>
+  //   {sourceType &&
+  //     PATHWAY_LIST[sourceType].map((elem) => {
+  //       return <option value={elem}>{elem}</option>
+  //     })}
+  // </select>
   return (
     <Wrapper>
       <div>
         <span>Source</span>
-        <select defaultValue="---" onChange={(e) => handleChangeSource(e)}>
-          <option>---</option>
-          {SOURCE_LIST.map((elem, idx) => {
-            return (
-              <option key={idx} value={elem}>
-                {elem}
-              </option>
-            )
-          })}
-        </select>
+        <Select
+          defaultValue="---"
+          onChange={(e) => handleChangeSource(e)}
+          data={SOURCE_LIST}
+          placeholder="Please select a Source"
+        />
       </div>
       <div>
         <span>Pathway</span>
-        <select
+        <Select
           defaultValue="---"
-          disabled={sourceType !== null ? false : true}
           onChange={(e) => handleChangePathway(e)}
-        >
-          <option>---</option>
-          {sourceType &&
-            PATHWAY_LIST[sourceType].map((elem) => {
-              return <option value={elem}>{elem}</option>
-            })}
-        </select>
+          data={sourceType ? PATHWAY_LIST[sourceType] : []}
+          placeholder="Please select a Pathway"
+        />
       </div>
       <div>
         <span>Receptor</span>
-        <select
+        <Select
           defaultValue="---"
-          disabled={pathwayType !== null ? false : true}
           onChange={(e) => handleChangeReceptor(e)}
-        >
-          <option>---</option>
-          {sourceType &&
-            pathwayType &&
-            RECEPTOR_LIST[sourceType][pathwayType].map((elem) => {
-              return <option value={elem}>{elem}</option>
-            })}
-        </select>
+          data={
+            sourceType && pathwayType
+              ? RECEPTOR_LIST[sourceType][pathwayType]
+              : []
+          }
+          placeholder="Please select a Receptor"
+        />
       </div>
     </Wrapper>
   )
@@ -117,10 +117,7 @@ export default NoScenario
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  border: 1px solid var(--gray-middle);
-  border-radius: 1rem;
-  padding: 2rem;
+  gap: 28px;
 
   div {
     display: flex;

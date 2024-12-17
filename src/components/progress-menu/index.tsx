@@ -1,21 +1,18 @@
-import { useLocation } from 'react-router-dom'
-import useProjectStore from '../../stores/project'
-import ProgressBar from '../progress-bar'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as S from './ProgressMenu.style'
+import Logo from '../logo'
+import ProgressTap from '../progress-tap'
 
 const ProgressMenu = () => {
-  const { projectName, projectDate } = useProjectStore()
   const location = useLocation()
+  const navigate = useNavigate()
   const path = location.pathname.split('/')
   const step = path[path.length - 1]
 
   return (
     <S.Wrapper>
-      <S.TextWrapper>
-        <span>Project Name : {projectName}</span>
-        <span>Date : {projectDate}</span>
-      </S.TextWrapper>
-      <ProgressBar step={+step} />
+      <Logo color="black" onClick={() => navigate('/')} />
+      <ProgressTap step={+step} />
     </S.Wrapper>
   )
 }

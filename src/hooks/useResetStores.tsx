@@ -14,8 +14,8 @@ export const useResetStores = () => {
   const resetAllStores = () => {
     resetProject()
     resetPreliminary()
-    resetInputData()
-    resetCharacterization()
+    resetInputData() // Preliminary
+    resetCharacterization() // Characterization, Remediation
     resetSummaryUI()
   }
 

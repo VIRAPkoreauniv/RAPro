@@ -82,6 +82,18 @@ export const Button = styled.button`
   background-color: transparent;
   margin-top: 36px;
   margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  .circle {
+    border-radius: 50%;
+    border: 1px solid #0075ff;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `
 export const DeleteButton = styled.img`
   cursor: pointer;

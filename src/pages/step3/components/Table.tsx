@@ -71,7 +71,7 @@ const LabelWrapper = styled.div`
   background: #f6f8fc;
   padding: 15px 18px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1.5fr 2fr 1fr;
 
   .label-text {
     color: #777;
@@ -92,7 +92,7 @@ const RowWrapper = styled.div`
   border-radius: 12px;
   padding: 15px 18px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1.5fr 2fr 1fr;
   box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.03);
 
   .risk-text {

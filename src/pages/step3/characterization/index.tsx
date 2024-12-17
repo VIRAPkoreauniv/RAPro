@@ -7,6 +7,7 @@ import { ScenarioListWrapper } from '../../step1/Step1Page.style'
 import ToggleBox from '../../../components/toggle-box'
 import useSummaryUIStore from '../../../stores/summary-ui'
 import styled from 'styled-components'
+import * as S from '../Step3Page.style'
 
 const CharacterizationStep3 = () => {
   const { scenarioList } = useCharacterizationStore()
@@ -55,7 +56,7 @@ const CharacterizationStep3 = () => {
 
   if (scenarioList && cRisk.length && ncRisk.length) {
     return (
-      <>
+      <S.Wrapper>
         <STEP3.ScenarioImage scenario={scenarioList[currScenario].scenario} />
         <ScenarioListWrapper>
           {scenarioList?.map((elem, idx) => {
@@ -85,7 +86,7 @@ const CharacterizationStep3 = () => {
         />
         <ToggleBox title="Results" isOpen={isResultOn}>
           <SectionWrapper>
-            <TableHeader>
+            <TableHeader rowNum={cRisk.length}>
               <span></span>
               {scenarioList?.map((elem, idx) => {
                 if (elem.name)
@@ -96,19 +97,19 @@ const CharacterizationStep3 = () => {
                   )
               })}
             </TableHeader>
-            <RowWrapper>
+            <RowWrapper rowNum={cRisk.length}>
               <span className="risk-text">Cancer risk</span>
               {cRisk.map((risk) => {
                 return <span className="value-text">{risk || '--'}</span>
               })}
             </RowWrapper>
-            <RowWrapper>
+            <RowWrapper rowNum={ncRisk.length}>
               <span className="risk-text">Non-Cancer risk</span>
               {ncRisk.map((risk) => {
                 return <span className="value-text">{risk || '--'}</span>
               })}
             </RowWrapper>
-            <RowWrapper>
+            <RowWrapper rowNum={cRisk.length}>
               <span className="risk-text">COC</span>
               {scenarioList.map((data) => {
                 return (
@@ -118,15 +119,15 @@ const CharacterizationStep3 = () => {
                 )
               })}
             </RowWrapper>
-            <RowWrapper>
+            <RowWrapper rowNum={cRisk.length}>
               <span className="risk-text">Exposure pathway</span>
               {scenarioList.map((data) => {
                 return <span className="value-text">{data.scenario}</span>
-              })}{' '}
+              })}
             </RowWrapper>
           </SectionWrapper>
         </ToggleBox>
-      </>
+      </S.Wrapper>
     )
   } else {
     return <h1>Loading...</h1>
@@ -140,11 +141,11 @@ const SectionWrapper = styled.section`
   flex-direction: column;
   gap: 10px;
 `
-const RowWrapper = styled.div`
+const RowWrapper = styled.div<{ rowNum: number }>`
   border-radius: 12px;
   padding: 15px 18px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: ${({ rowNum }) => `repeat(${rowNum + 1}, 1fr)`};
   gap: 10px;
   box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.03);
 
@@ -165,10 +166,10 @@ const RowWrapper = styled.div`
     line-height: normal;
   }
 `
-const TableHeader = styled.div`
+const TableHeader = styled.div<{ rowNum: number }>`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
+  grid-template-columns: ${({ rowNum }) => `repeat(${rowNum + 1}, 1fr)`};
+  gap: 20px;
   padding: 0 18px;
 `
 

@@ -1,30 +1,37 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-  background-color: white;
-  padding: 2rem;
-`
-
 export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 100px;
   padding-top: 45px;
+  justify-content: space-between;
+  .inactive-stage {
+    display: flex;
+    flex-direction: row;
+  }
 `
-export const Menu = styled.span<{ stage: boolean }>`
-  color: ${(props) => (props.stage ? 'blue' : 'gray')};
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 26px; /* 144.444% */
-  letter-spacing: -0.36px;
+export const Menu = styled.div<{ stage: boolean }>`
   cursor: pointer;
-`
-
-export const ColumnDivider = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  border-radius: 18px 18px 0px 0px;
+  border-top: ${({ stage }) => stage && '1px solid #0075ff'};
+  border-left: ${({ stage }) => stage && '1px solid #0075ff'};
+  border-right: ${({ stage }) => stage && '1px solid #0075ff'};
+  border-bottom: none;
+  ${({ stage }) => stage && '0px 4px 20px 0px rgba(0, 0, 0, 0.05)'};
+  display: flex;
+  padding: ${({ stage }) => (stage ? '16px 60px' : '16px 40px')};
+  justify-content: center;
+  align-items: center;
+  span {
+    color: ${({ stage }) => (stage ? '#0075ff' : '#787878')};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 26px; /* 144.444% */
+    letter-spacing: -0.36px;
+  }
 `
 export const ScenarioListWrapper = styled.div`
   display: flex;
@@ -52,6 +59,8 @@ export const Wrapper = styled.div`
   padding-top: 40px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 4.5rem;
   overflow-y: scroll;
 
@@ -70,6 +79,12 @@ export const Wrapper = styled.div`
     font-weight: 500;
     line-height: normal;
   }
+`
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 34px;
 `
 export const SelectWrapper = styled.div`
   display: flex;
@@ -135,4 +150,10 @@ export const InputWrapper = styled.div`
       line-height: normal;
     }
   }
+`
+
+export const NavigationButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  padding: 20px 0 60px;
 `

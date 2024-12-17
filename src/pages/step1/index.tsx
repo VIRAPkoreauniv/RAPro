@@ -26,26 +26,27 @@ export default function Step1Page() {
     'Remediation/mitigation': <RemediationStep1 />,
   }
 
+  const inactiveStageList = STAGE_LIST.filter((elem) => elem !== stage)
+
   useEffect(() => {
     setCurrStep(1)
   }, [])
 
   return (
     <Layout>
-      <S.Container>
-        <S.MenuWrapper>
-          {STAGE_LIST.map((elem) => (
-            <S.Menu
-              stage={stage === elem}
-              key={elem}
-              onClick={() => setStage(elem)}
-            >
-              {elem}
+      <S.MenuWrapper>
+        <S.Menu stage={true}>
+          <span>{stage}</span>
+        </S.Menu>
+        <div className="inactive-stage">
+          {inactiveStageList.map((elem) => (
+            <S.Menu stage={false} key={elem} onClick={() => setStage(elem)}>
+              <span>{elem}</span>
             </S.Menu>
           ))}
-        </S.MenuWrapper>
-        {STAGE[stage]}
-      </S.Container>
+        </div>
+      </S.MenuWrapper>
+      {STAGE[stage]}
     </Layout>
   )
 }

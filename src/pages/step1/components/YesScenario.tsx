@@ -10,16 +10,24 @@ const YesScenario = ({ scenario, setScenario }: YesScenarioProps) => {
   return (
     <Wrapper>
       <span>Select a scenario for a site to be assessed</span>
-      <select
-        defaultValue="---"
-        value={scenario ?? ''}
-        onChange={(e) => setScenario(+e.target.value)}
-      >
-        <option value="">---</option>
-        {SCENARIO_NUMBER_LIST?.map((elem: number) => {
-          return <option>{elem}</option>
-        })}
-      </select>
+      <div className="custom-select">
+        <select
+          defaultValue="---"
+          value={scenario ?? ''}
+          onChange={(e) => setScenario(+e.target.value)}
+        >
+          <option value="" className="option">
+            ---
+          </option>
+          {SCENARIO_NUMBER_LIST?.map((elem: number) => {
+            return (
+              <option className="option" key={elem}>
+                {elem}
+              </option>
+            )
+          })}
+        </select>
+      </div>
     </Wrapper>
   )
 }
@@ -40,8 +48,37 @@ const Wrapper = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-  select {
+  .custom-select {
+    position: relative;
     width: 100%;
+    select {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      background-color: #f6f8fc;
+      padding: 15px 18px;
+      border: none;
+      appearance: none; /* 브라우저 기본 화살표 제거 */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      color: #333;
+      font-family: Pretendard;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 142.857% */
+      letter-spacing: -0.35px;
+    }
+  }
+  .custom-select::after {
+    content: '▼';
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
   }
   fieldset {
     display: flex;

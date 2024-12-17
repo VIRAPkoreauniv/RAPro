@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import CHECK_ICON from '../../../assets/icon/check.svg'
+import UNCHECK_ICON from '../../../assets/icon/uncheck.svg'
 
 interface YesNoHandlerProps {
   isScenarioKnown: boolean | undefined
@@ -11,29 +13,23 @@ const YesNoHandler = ({
 }: YesNoHandlerProps) => {
   return (
     <Wrapper>
-      <span>Do you know which scenario to be assessed?</span>
-      <fieldset>
-        <div onClick={() => handleScenarioKnown(true)}>
-          <input
-            type="radio"
-            id="Yes"
-            name="know-scenario"
-            value="Yes"
-            checked={isScenarioKnown === true}
-          />
-          <label htmlFor="Yes">Yes</label>
+      <span className="title">Do you know which scenario to be assessed?</span>
+      <div className="option-wrapper">
+        <div className="option" onClick={() => handleScenarioKnown(true)}>
+          <img src={isScenarioKnown ? CHECK_ICON : UNCHECK_ICON} />
+          <span className="text">Yes</span>
         </div>
-        <div onClick={() => handleScenarioKnown(false)}>
-          <input
-            type="radio"
-            id="No"
-            name="know-scenario"
-            value="No"
-            checked={isScenarioKnown === false}
+        <div className="option" onClick={() => handleScenarioKnown(false)}>
+          <img
+            src={
+              isScenarioKnown === undefined || isScenarioKnown === false
+                ? CHECK_ICON
+                : UNCHECK_ICON
+            }
           />
-          <label htmlFor="No">No</label>
+          <span className="text">No</span>
         </div>
-      </fieldset>
+      </div>
     </Wrapper>
   )
 }
@@ -46,7 +42,7 @@ const Wrapper = styled.div`
   gap: 2rem;
   align-items: flex-start;
 
-  span {
+  .title {
     color: #111;
     font-family: Pretendard;
     font-size: 18px;
@@ -54,14 +50,38 @@ const Wrapper = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-  select {
-    width: 100%;
+  .option-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 23px;
   }
-  fieldset {
+  .option {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  .text {
+    color: #767676;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  /* fieldset {
     display: flex;
     padding: 10px;
     width: 100%;
     gap: 50px;
+    border: none;
 
     div {
       display: flex;
@@ -75,5 +95,5 @@ const Wrapper = styled.div`
       font-weight: 400;
       line-height: normal;
     }
-  }
+  } */
 `

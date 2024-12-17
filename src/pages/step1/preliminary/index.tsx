@@ -45,29 +45,33 @@ const PreliminaryStep1 = () => {
 
   return (
     <S.Wrapper>
-      <STEP1.ChemicalOfConcern
-        source={siteSource}
-        updateSource={updateSource}
-      />
-      <STEP1.YesNoHandler
-        isScenarioKnown={isScenarioKnown}
-        handleScenarioKnown={handleScenarioKnown}
-      />
-      {isScenarioKnown === true ? (
-        <STEP1.YesScenario scenario={scenario} setScenario={setScenario} />
-      ) : isScenarioKnown === false ? (
-        <STEP1.NoScenario
-          setScenario={setScenario}
-          sourceType={sourceType}
-          pathwayType={pathwayType}
-          receptorType={receptorType}
-          setSourceType={setSourceType}
-          setPathwayType={setPathwayType}
-          setReceptorType={setReceptorType}
+      <S.Content>
+        <STEP1.ChemicalOfConcern
+          source={siteSource}
+          updateSource={updateSource}
         />
-      ) : null}
-      {scenario && <STEP1.ScenarioImage scenario={scenario} />}
-      <NavigationButtons isNextOn={!!scenario} />
+        <STEP1.YesNoHandler
+          isScenarioKnown={isScenarioKnown}
+          handleScenarioKnown={handleScenarioKnown}
+        />
+        {isScenarioKnown === true ? (
+          <STEP1.YesScenario scenario={scenario} setScenario={setScenario} />
+        ) : isScenarioKnown === false ? (
+          <STEP1.NoScenario
+            setScenario={setScenario}
+            sourceType={sourceType}
+            pathwayType={pathwayType}
+            receptorType={receptorType}
+            setSourceType={setSourceType}
+            setPathwayType={setPathwayType}
+            setReceptorType={setReceptorType}
+          />
+        ) : null}
+        {scenario && <STEP1.ScenarioImage scenario={scenario} />}
+      </S.Content>
+      <S.NavigationButtonWrapper>
+        <NavigationButtons isNextOn={!!scenario} />
+      </S.NavigationButtonWrapper>
     </S.Wrapper>
   )
 }

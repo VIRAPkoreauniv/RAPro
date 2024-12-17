@@ -1,31 +1,43 @@
 import { ReactNode } from 'react'
 import * as S from './Layout.style'
-import AppBar from '../components/app-bar'
 import ProgressMenu from '../components/progress-menu'
 import useProjectStore from '../stores/project'
+import PENCIL_ICON from '../assets/icon/pencil.svg'
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  const { currStep } = useProjectStore()
-  const STEP: Record<number, JSX.Element> = {
-    1: (
-      <>
-        <h1>STEP 1 : Select a Site Scenario</h1>
-        <p>Select a scenario for a site to be assessed.</p>
-      </>
-    ),
-    2: <h1>STEP 2: Input Site Data</h1>,
-    3: <h1>STEP 3: Summary</h1>,
+  const { currStep, projectName, setProjectName, projectDate } =
+    useProjectStore()
+  const STEP: Record<number, string> = {
+    1: 'Site management stage',
+    2: 'Input Site Data',
+    3: 'Summary',
   }
+
+  const editProjectName = () => {
+    const newProjectName = prompt('수정할 프로젝트 명을 입력해주세요')
+
+    newProjectName && setProjectName(newProjectName)
+  }
+
   return (
     <S.Wrapper>
-      <AppBar />
-      <S.ColumnDivider>
-        <ProgressMenu />
-        <S.Content>
-          {STEP[currStep]}
-          {children}
-        </S.Content>
-      </S.ColumnDivider>
+      <ProgressMenu />
+      <S.Content>
+        <S.ProjectInfo>
+          <div className="project-name-wrapper">
+            <span className="project-name">{projectName}</span>
+            <img src={PENCIL_ICON} alt="수정" onClick={editProjectName} />
+          </div>
+          <span className="project-date">{projectDate}</span>
+        </S.ProjectInfo>
+        <S.Step>
+          <div className="step-wrapper">
+            <span>STEP {currStep}</span>
+          </div>
+          <span className="description">{STEP[currStep]}</span>
+        </S.Step>
+        {children}
+      </S.Content>
     </S.Wrapper>
   )
 }

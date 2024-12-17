@@ -32,6 +32,7 @@ export default SmallButton
 
 const Backbutton = styled.button`
   display: flex;
+  width: 120px;
   padding: 16px 32px;
   justify-content: center;
   align-items: center;
@@ -52,6 +53,7 @@ const Backbutton = styled.button`
 
 const NextButton = styled.button<{ isActive?: boolean }>`
   display: flex;
+  width: 120px;
   padding: 16px 32px;
   justify-content: center;
   align-items: center;

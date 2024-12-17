@@ -1,17 +1,21 @@
 import styled from 'styled-components'
 import { SCENARIO_IMAGE_LIST } from '../../../data/scenario'
+import useProjectStore from '../../../stores/project'
 
 interface ScenarioImageProps {
   scenario: number
 }
 
 const ScenarioImage = ({ scenario }: ScenarioImageProps) => {
+  const { currStep } = useProjectStore()
   return (
     <>
-      <InfoText>
-        ※ A diagram for the selected site scenario is visualized as follows.
-      </InfoText>
-      <img src={SCENARIO_IMAGE_LIST[scenario]} />
+      {currStep !== 3 && (
+        <InfoText>
+          ※ A diagram for the selected site scenario is visualized as follows.
+        </InfoText>
+      )}
+      <Img src={SCENARIO_IMAGE_LIST[scenario]} />
     </>
   )
 }
@@ -25,4 +29,7 @@ const InfoText = styled.span`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+`
+const Img = styled.img`
+  border-radius: 12px;
 `

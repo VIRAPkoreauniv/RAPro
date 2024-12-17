@@ -4,6 +4,8 @@ import { IPathway, PathwayInputType } from '../../../types/input.type'
 import { useQuery } from '@tanstack/react-query'
 import { getSoilList } from '../../../apis/computeAPI'
 import { SCENARIO_PARAMS } from '../../../data/scenario-params'
+import Select from '../../../components/select'
+import StepInput from '../../../components/input/step-input'
 
 interface PathwayProps {
   scenario: number
@@ -35,27 +37,25 @@ const Pathway = ({ scenario, pathway, updatePathway }: PathwayProps) => {
       switch (inputType) {
         case 'dropdown':
           return (
-            <select
+            <Select
               defaultValue="---"
               value={pathway[elem]}
               onChange={(e) =>
                 updatePathway({ ...pathway, [elem]: e.target.value })
               }
-            >
-              <option value="">---</option>
-              {SOIL_LIST?.data.map((elem: string) => {
-                return <option>{elem}</option>
-              })}
-            </select>
+              data={SOIL_LIST?.data}
+              placeholder={`Please select a ${elem}`}
+            />
           )
         case 'input':
           return (
-            <input
+            <StepInput
               type={valueType}
               value={pathway[elem]}
               onChange={(e) =>
                 updatePathway({ ...pathway, [elem]: Number(e.target.value) })
               }
+              placeholder={`Please enter a ${elem}`}
             />
           )
         case 'computed':
@@ -65,16 +65,18 @@ const Pathway = ({ scenario, pathway, updatePathway }: PathwayProps) => {
       }
   }
 
+  console.log(paramsList.pathway)
+
   return (
     <InputWrapper>
       <div className="section-wrapper">
         <span className="section-title">Pathway</span>
         {paramsList.pathway.map((elem) => {
           return (
-            <SelectWrapper>
-              <InputTitle>{PATHWAY_PARAMS[elem].name}</InputTitle>
+            <>
+              {/* <InputTitle>{PATHWAY_PARAMS[elem].name}</InputTitle> */}
               {renderPathwayInputElement(PATHWAY_PARAMS[elem], elem)}
-            </SelectWrapper>
+            </>
           )
         })}
       </div>
@@ -102,44 +104,5 @@ const InputWrapper = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-  }
-  .input-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 10px;
-
-    select {
-      padding: 5px 20px;
-      height: 45px;
-    }
-  }
-`
-
-const InputTitle = styled.span`
-  color: #333;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: -0.35px;
-  white-space: nowrap;
-`
-const SelectWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-
-  select {
-    width: 100%;
-    height: 40px;
-  }
-  input {
-    width: 100%;
-    height: 40px;
   }
 `

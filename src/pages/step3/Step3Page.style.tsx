@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 4.5rem;
   overflow-y: scroll;
+  padding-top: 32px;
+  gap: 40px;
 `
 export const ScenarioImg = styled.img`
   width: 100%;

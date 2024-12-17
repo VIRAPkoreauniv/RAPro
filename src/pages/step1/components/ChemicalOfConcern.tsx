@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import styled from 'styled-components'
 import { getChemicalList } from '../../../apis/computeAPI'
 import { ISource } from '../../../types/input.type'
+import Select from '../../../components/select'
 
 interface ChemicalOfConcernProps {
   source: ISource | undefined
@@ -21,16 +22,13 @@ const ChemicalOfConcern = ({
   return (
     <Wrapper>
       <span>Chemical of Concern</span>
-      <select
-        defaultValue="---"
+      <Select
+        defaultValue={'---'}
         value={source?.chemicalOfConcern}
         onChange={(e) => updateSource({ chemicalOfConcern: e.target.value })}
-      >
-        <option value="">---</option>
-        {CHEMICAL_LIST?.data.map((elem: string) => {
-          return <option>{elem}</option>
-        })}
-      </select>
+        data={CHEMICAL_LIST?.data}
+        placeholder="Select a COC (Chemical of Concern)"
+      />
     </Wrapper>
   )
 }
@@ -51,9 +49,40 @@ const Wrapper = styled.div`
     font-weight: 500;
     line-height: normal;
   }
-  select {
+
+  .custom-select {
+    position: relative;
     width: 100%;
+    select {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      background-color: #f6f8fc;
+      padding: 15px 18px;
+      border: none;
+      appearance: none; /* 브라우저 기본 화살표 제거 */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      color: #333;
+      font-family: Pretendard;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 20px; /* 142.857% */
+      letter-spacing: -0.35px;
+    }
   }
+  .custom-select::after {
+    content: '▼';
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
   fieldset {
     display: flex;
     padding: 10px;

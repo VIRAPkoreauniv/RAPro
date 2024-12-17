@@ -6,6 +6,9 @@ import CloseIcon from '../../assets/icon/close.svg'
 import { useEffect, useState } from 'react'
 import SmallButton from '../small-button'
 import useProjectStore from '../../stores/project'
+import PLUS_ICON from '../../assets/icon/plus.svg'
+import ARROW_RIGHT_ICON from '../../assets/icon/arrow-right.svg'
+import CANCEL_ICON from '../../assets/icon/x.svg'
 
 const ScenarioModal = () => {
   const {
@@ -128,7 +131,12 @@ const ScenarioModal = () => {
               )
             })}
         {numberOfScenario < 5 && (
-          <S.Button onClick={handleAddButton}>+ Scenarios</S.Button>
+          <S.Button onClick={handleAddButton}>
+            <div className="circle">
+              <img src={PLUS_ICON} alt="추가" />
+            </div>
+            Scenarios
+          </S.Button>
         )}
       </S.ModalWrapper>
       <S.SmallButtonWrapper>
@@ -139,6 +147,7 @@ const ScenarioModal = () => {
             setStage('Preliminary')
           }}
         >
+          <img src={CANCEL_ICON} alt="cancel" />
           Cancel
         </SmallButton>
         <SmallButton
@@ -148,7 +157,8 @@ const ScenarioModal = () => {
           }}
           isActive={isActive}
         >
-          Next &nbsp;{'>'}
+          Next
+          <img src={ARROW_RIGHT_ICON} alt="next" />
         </SmallButton>
       </S.SmallButtonWrapper>
     </div>

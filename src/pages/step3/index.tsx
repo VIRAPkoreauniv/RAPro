@@ -23,8 +23,8 @@ export default function Step3Page() {
 
   return (
     <Layout>
+      {STAGE[stage]}
       <S.Wrapper>
-        {STAGE[stage]}
         <NavigationButtons isNextOn={true} />
       </S.Wrapper>
     </Layout>
