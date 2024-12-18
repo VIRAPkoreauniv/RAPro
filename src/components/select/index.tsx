@@ -15,6 +15,9 @@ const Select = ({
   data,
   placeholder,
 }: SelectProps) => {
+  if (!data) {
+    return <p>loading...</p>
+  }
   return (
     <SelectWrapper>
       <div className="select">
@@ -22,7 +25,7 @@ const Select = ({
           <option value="" className="option">
             {placeholder || ''}
           </option>
-          {data.map((elem: string) => {
+          {data?.map((elem: string) => {
             return (
               <option key={elem} className="option">
                 {elem}

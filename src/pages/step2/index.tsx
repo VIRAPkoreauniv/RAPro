@@ -6,9 +6,11 @@ import * as S from './Step2Page.style'
 import PreliminaryStep2 from './preliminary'
 import CharacterizationStep2 from './characterization'
 import RemediationStep2 from './remediation'
+import { useNavigate } from 'react-router-dom'
 
 export default function Step2Page() {
-  const { stage, setCurrStep } = useProjectStore()
+  const { stage, setCurrStep, projectName } = useProjectStore()
+  const navigate = useNavigate()
 
   const STAGE: Record<StageType, JSX.Element> = {
     Preliminary: <PreliminaryStep2 />,
@@ -17,6 +19,11 @@ export default function Step2Page() {
   }
 
   useEffect(() => {
+    if (!projectName) {
+      alert('비정상적인 접근입니다. 처음부터 다시 시도해주세요.')
+      navigate('/')
+    }
+
     setCurrStep(2)
   }, [])
 

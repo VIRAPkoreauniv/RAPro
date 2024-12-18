@@ -21,6 +21,8 @@ const PreliminaryStep2 = () => {
   } = useSiteDataStore((state) => state)
 
   useEffect(() => {
+    if (!source || !pathway || !receptor) return
+
     const isValid = isAllDataEntered({
       scenario: scenario || 0,
       source: source,
@@ -30,6 +32,7 @@ const PreliminaryStep2 = () => {
 
     setIsNextOn(isValid)
   }, [source, pathway, receptor])
+
   return (
     <S.Wrapper>
       <S.Content>

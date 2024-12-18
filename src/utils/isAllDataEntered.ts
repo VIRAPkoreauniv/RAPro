@@ -16,6 +16,9 @@ const isAllDataEntered = ({
 }: isAllDataEnteredProps) => {
   const paramsList = SCENARIO_PARAMS[scenario || 0]
 
+  if (!paramsList?.source || !paramsList?.pathway || !paramsList?.receptor)
+    return false
+
   const countSourceInput = Object.values(source).filter((value) =>
     Boolean(value),
   ).length

@@ -5,6 +5,7 @@ import useProjectStore from '../../stores/project'
 import { useEffect } from 'react'
 import CharacterizationStep1 from './characterization'
 import RemediationStep1 from './remediation'
+import { useNavigate } from 'react-router-dom'
 
 export type StageType =
   | 'Preliminary'
@@ -12,7 +13,10 @@ export type StageType =
   | 'Remediation/mitigation'
 
 export default function Step1Page() {
-  const { stage, setStage, setCurrStep } = useProjectStore((state) => state)
+  const { stage, setStage, setCurrStep, projectName } = useProjectStore(
+    (state) => state,
+  )
+  const navigate = useNavigate()
 
   const STAGE_LIST: StageType[] = [
     'Preliminary',
@@ -29,6 +33,11 @@ export default function Step1Page() {
   const inactiveStageList = STAGE_LIST.filter((elem) => elem !== stage)
 
   useEffect(() => {
+    if (!projectName) {
+      alert('비정상적인 접근입니다. 처음부터 다시 시도해주세요.')
+      navigate('/')
+    }
+
     setCurrStep(1)
   }, [])
 

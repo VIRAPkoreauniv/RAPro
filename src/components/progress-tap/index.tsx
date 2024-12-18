@@ -36,8 +36,6 @@ const ProgressTap = ({ step }: { step: number }) => {
   return (
     <S.Wrapper>
       {PROGRESS_LIST.map((elem) => {
-        console.log(step === elem.step)
-
         return (
           <S.StepWrapper key={elem.step} isActive={step === elem.step}>
             {ICON_LIST[getStatus(+elem.step)]}

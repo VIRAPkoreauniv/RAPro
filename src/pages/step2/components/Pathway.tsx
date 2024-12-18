@@ -65,19 +65,12 @@ const Pathway = ({ scenario, pathway, updatePathway }: PathwayProps) => {
       }
   }
 
-  console.log(paramsList.pathway)
-
   return (
     <InputWrapper>
       <div className="section-wrapper">
         <span className="section-title">Pathway</span>
-        {paramsList.pathway.map((elem) => {
-          return (
-            <>
-              {/* <InputTitle>{PATHWAY_PARAMS[elem].name}</InputTitle> */}
-              {renderPathwayInputElement(PATHWAY_PARAMS[elem], elem)}
-            </>
-          )
+        {paramsList?.pathway?.map((elem) => {
+          return <>{renderPathwayInputElement(PATHWAY_PARAMS[elem], elem)}</>
         })}
       </div>
     </InputWrapper>

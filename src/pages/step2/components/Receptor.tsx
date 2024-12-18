@@ -77,7 +77,7 @@ const Receptor = ({ scenario, receptor, updateReceptor }: ReceptorProps) => {
     <InputWrapper>
       <div className="section-wrapper">
         <span className="section-title">Receptor</span>
-        {paramsList.receptor.map((elem) => {
+        {paramsList?.receptor?.map((elem) => {
           return <>{renderReceptorInputElement(RECEPTOR_PARAMS[elem], elem)}</>
         })}
       </div>

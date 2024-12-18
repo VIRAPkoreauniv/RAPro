@@ -7,9 +7,11 @@ import { StageType } from '../step1'
 import NavigationButtons from '../../components/navigation-buttons'
 import CharacterizationStep3 from './characterization'
 import RemediationStep3 from './remediation'
+import { useNavigate } from 'react-router-dom'
 
 export default function Step3Page() {
-  const { stage, setCurrStep } = useProjectStore()
+  const { stage, setCurrStep, projectName } = useProjectStore()
+  const navigate = useNavigate()
 
   const STAGE: Record<StageType, JSX.Element> = {
     Preliminary: <PreliminaryStep3 />,
@@ -18,6 +20,11 @@ export default function Step3Page() {
   }
 
   useEffect(() => {
+    if (!projectName) {
+      alert('비정상적인 접근입니다. 처음부터 다시 시도해주세요.')
+      navigate('/')
+    }
+
     setCurrStep(3)
   }, [])
 
