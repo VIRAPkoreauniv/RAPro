@@ -34,6 +34,10 @@ const Receptor = ({ scenario, receptor, updateReceptor }: ReceptorProps) => {
       RAF_d: undefined,
       M: undefined,
       SA: undefined,
+      EV: undefined,
+      BCF: undefined,
+      Z: undefined,
+      ET: undefined,
     })
   }
 

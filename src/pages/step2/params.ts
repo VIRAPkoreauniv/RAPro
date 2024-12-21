@@ -35,6 +35,36 @@ export const PATHWAY_PARAMS: Record<PathwayInputType, IParams> = {
     inputType: 'input',
     valueType: 'number',
   },
+  VF: {
+    name: 'VF',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  PEF: {
+    name: 'PEF',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  LF: {
+    name: 'LF',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  DAF: {
+    name: 'DAF',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  FI: {
+    name: 'FI',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  DF: {
+    name: 'DF',
+    inputType: 'input',
+    valueType: 'number',
+  },
 }
 
 export const RECEPTOR_PARAMS: Record<ReceptorInputType, IParams> = {
@@ -85,6 +115,26 @@ export const RECEPTOR_PARAMS: Record<ReceptorInputType, IParams> = {
   },
   SA: {
     name: 'SA',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  EV: {
+    name: 'EV',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  BCF: {
+    name: 'BCF',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  Z: {
+    name: 'Z',
+    inputType: 'input',
+    valueType: 'number',
+  },
+  ET: {
+    name: 'ET',
     inputType: 'input',
     valueType: 'number',
   },

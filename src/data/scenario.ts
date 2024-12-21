@@ -57,8 +57,8 @@ export const RECEPTOR_LIST: ReceptorListType = {
 }
 
 export const SCENARIO_NUMBER_LIST = [
-  // 1, 2, 3, 4, 6, 8, 9, 10, 11, 13, 14, 15, 16,
-  1, 2, 4, 15,
+  1, 2, 3, 4, 6, 8, 9, 10, 11, 13, 14, 15, 16,
+  // 1, 2, 4, 15,
 ]
 
 export const SCENARIO_IMAGE_LIST: Record<number, string> = {

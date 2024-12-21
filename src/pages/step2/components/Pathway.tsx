@@ -26,6 +26,12 @@ const Pathway = ({ scenario, pathway, updatePathway }: PathwayProps) => {
     updatePathway({
       soilType: undefined,
       Br: undefined,
+      VF: undefined,
+      PEF: undefined,
+      LF: undefined,
+      DAF: undefined,
+      FI: undefined,
+      DF: undefined,
     })
   }
 

@@ -1,5 +1,13 @@
 export type SourceInputType = 'chemicalOfConcern' | 'concentration'
-export type PathwayInputType = 'soilType' | 'Br'
+export type PathwayInputType =
+  | 'soilType'
+  | 'Br'
+  | 'VF'
+  | 'PEF'
+  | 'LF'
+  | 'DAF'
+  | 'FI'
+  | 'DF'
 export type ReceptorInputType =
   | 'exposureType'
   | 'RBAF'
@@ -11,7 +19,10 @@ export type ReceptorInputType =
   | 'RAF_d'
   | 'M'
   | 'SA'
-
+  | 'EV'
+  | 'BCF'
+  | 'Z'
+  | 'ET'
 export interface ISource {
   chemicalOfConcern?: string
   concentration?: number
@@ -19,6 +30,12 @@ export interface ISource {
 export interface IPathway {
   soilType?: string
   Br?: number
+  VF?: number
+  PEF?: number
+  LF?: number
+  DAF?: number
+  FI?: number
+  DF?: number
 }
 export interface IReceptor {
   exposureType?: string
@@ -31,4 +48,8 @@ export interface IReceptor {
   RAF_d?: number
   M?: number
   SA?: number
+  EV?: number
+  BCF?: number
+  Z?: number
+  ET?: number
 }
