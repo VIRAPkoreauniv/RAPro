@@ -56,25 +56,11 @@ const NoScenario = ({
   useEffect(() => {
     if (sourceType && pathwayType && receptorType) {
       const scenario = getScenario({ sourceType, pathwayType, receptorType })
-      const AVAILABLE_SCENARIOS = [1, 2, 4, 15]
-      if (scenario && !AVAILABLE_SCENARIOS.includes(scenario)) {
-        alert('아직 이용할 수 없는 시나리오입니다. ')
-        return
-      }
+
       scenario && setScenario(scenario)
     }
   }, [receptorType])
-  // <select
-  //   defaultValue="---"
-  //   disabled={sourceType !== null ? false : true}
-  //   onChange={(e) => handleChangePathway(e)}
-  // >
-  //   <option>---</option>
-  //   {sourceType &&
-  //     PATHWAY_LIST[sourceType].map((elem) => {
-  //       return <option value={elem}>{elem}</option>
-  //     })}
-  // </select>
+
   return (
     <Wrapper>
       <div>
